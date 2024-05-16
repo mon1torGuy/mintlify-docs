@@ -1,6 +1,6 @@
 ---
-title: 'Biolerplates'
-description: 'Use  boilerplates to deploy typeauth in most common languages.'
+title: 'Boilerplates'
+description: 'Use boilerplates to deploy typeauth in most common languages with your API.'
 ---
 
 
@@ -147,7 +147,7 @@ app.use((req, res, next) => {
     const apiUrl = "https://api.typeauth.com/authenticate";
 
     axios
-        .post(apiUrl, { key: token }, { headers: { "Content-Type": "application/json" } })
+        .post(apiUrl, { token: token }, { headers: { "Content-Type": "application/json" } })
         .then((response) => {
             if (response.data.success) {
                 // Authentication successful
@@ -187,7 +187,7 @@ import requests
 API_URL = 'https://api.typeauth.com/authenticate'
 
 def authenticate_user(token):
-    data = {'key': token}
+    data = {'token': token}
     headers = {'Content-Type': 'application/json'}
 
     try:
@@ -285,7 +285,7 @@ API_URL = 'https://api.typeauth.com/authenticate'
 
 def authenticate_user(token)
   uri = URI(API_URL)
-  data = { key: token }
+  data = { token: token }
 
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
