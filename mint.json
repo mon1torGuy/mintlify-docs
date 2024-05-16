@@ -37,19 +37,15 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development", "reference", "boilerplates"]
-    },
-    {
-      "group": "Essentials",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "introduction",
+        "quickstart",
+        "development",
+        "reference",
+        "boilerplates"
       ]
     },
+
     {
       "group": "API Documentation",
       "pages": ["api-reference/introduction"]
@@ -74,7 +70,6 @@
         "api-reference/keys/update-a-keys-remaining-limit",
         "api-reference/keys/delete-a-key",
         "api-reference/keys/verify-authentication-key"
-
       ]
     },
     {
@@ -83,7 +78,6 @@
         "api-reference/jwts/create-jwt",
         "api-reference/jwts/delete-jwt",
         "api-reference/jwts/list-jwts"
- 
       ]
     },
     {
@@ -100,10 +94,12 @@
       "pages": [
         "api-reference/feedback/create-feedback",
         "api-reference/feedback/get-feedback"
-
       ]
     }
   ],
+  "feedback": {
+    "thumbsRating": true
+  },
   "modeToggle": {
     "default": "dark",
     "isHidden": true
