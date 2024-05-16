@@ -9,9 +9,9 @@
 
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
+    "primary": "#35958b",
     "light": "#07C983",
-    "dark": "#0D9373",
+    "dark": "#35958b",
     "anchors": {
       "from": "#0D9373",
       "to": "#07C983"
@@ -37,13 +37,7 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": [
-        "introduction",
-        "quickstart",
-        "development",
-        "reference",
-        "boilerplates"
-      ]
+      "pages": ["introduction", "development", "reference", "boilerplates"]
     },
 
     {
