@@ -1,0 +1,333 @@
+---
+title: 'Biolerplates'
+description: 'Use  boilerplates to deploy typeauth in most common languages.'
+---
+
+
+
+## Go
+ ```go Mux implementation
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+    "strings"
+)
+
+const apiUrl = "https://api.typeauth.com/authenticate"
+
+type AuthResponse struct {
+    Success bool `json:"success"`
+    Message string `json:"message"`
+    Data    []struct {
+        Valid    bool `json:"valid"`
+        RateLimit struct {
+            Remaining interface{} `json:"remaining"`
+        } `json:"rate_limit"`
+        Remaining struct {
+            Remaining int `json:"remaining"`
+        } `json:"remaining"`
+        Enabled bool `json:"enabled"`
+    } `json:"data"`
+}
+
+func AuthMiddleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        authorizationHeader := r.Header.Get("Authorization")
+        token := strings.Replace(authorizationHeader, "Bearer ", "", 1)
+
+        if token == "" {
+            // Token is missing
+            w.WriteHeader(http.StatusUnauthorized)
+            json.NewEncoder(w).Encode(map[string]string{"error": "Unauthorized: Missing token"})
+            return
+        }
+
+        data := map[string]string{
+            "key": token,
+        }
+        jsonData, err := json.Marshal(data)
+        if err != nil {
+            fmt.Println("Error marshaling JSON:", err)
+            w.WriteHeader(http.StatusInternalServerError)
+            json.NewEncoder(w).Encode(map[string]string{"error": "Internal Server Error"})
+            return
+        }
+
+        req, err := http.NewRequest("POST", apiUrl, bytes.NewBuffer(jsonData))
+        if err != nil {
+            fmt.Println("Error creating request:", err)
+            w.WriteHeader(http.StatusInternalServerError)
+            json.NewEncoder(w).Encode(map[string]string{"error": "Internal Server Error"})
+            return
+        }
+        req.Header.Set("Content-Type", "application/json")
+
+        client := &http.Client{}
+        resp, err := client.Do(req)
+        if err != nil {
+            fmt.Println("Error making API request:", err)
+            w.WriteHeader(http.StatusInternalServerError)
+            json.NewEncoder(w).Encode(map[string]string{"error": "Internal Server Error"})
+            return
+        }
+        defer resp.Body.Close()
+
+        body, err := ioutil.ReadAll(resp.Body)
+        if err != nil {
+            fmt.Println("Error reading response body:", err)
+            w.WriteHeader(http.StatusInternalServerError)
+            json.NewEncoder(w).Encode(map[string]string{"error": "Internal Server Error"})
+            return
+        }
+
+        var authResponse AuthResponse
+        err = json.Unmarshal(body, &authResponse)
+        if err != nil {
+            fmt.Println("Error unmarshaling JSON:", err)
+            w.WriteHeader(http.StatusInternalServerError)
+            json.NewEncoder(w).Encode(map[string]string{"error": "Internal Server Error"})
+            return
+        }
+
+        if authResponse.Success {
+            // Authentication successful
+            valid := authResponse.Data[0].Valid
+            rateLimit := authResponse.Data[0].RateLimit.Remaining
+            remaining := authResponse.Data[0].Remaining.Remaining
+            enabled := authResponse.Data[0].Enabled
+
+            // Process the response data as needed
+            // ...
+
+            next.ServeHTTP(w, r)
+        } else {
+            // Authentication failed
+            w.WriteHeader(http.StatusForbidden)
+            json.NewEncoder(w).Encode(map[string]string{"error": "Forbidden: Invalid token"})
+        }
+    })
+}
+
+func main() {
+    mux := http.NewServeMux()
+
+    // Apply the authentication middleware to routes that require authentication
+    mux.Handle("/protected", AuthMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        // Protected route logic
+        // ...
+    })))
+
+    // Other routes and handlers
+    // ...
+
+    http.ListenAndServe(":8080", mux)
+}
+    ```
+## Typescript
+ ```typescript Express
+import express from "express";
+import axios from "axios";
+
+const app = express();
+
+app.use((req, res, next) => {
+    const authorizationHeader = req.headers.authorization;
+    const token = authorizationHeader?.replace("Bearer ", "");
+
+    if (!token) {
+        // Token is missing
+        return res.status(401).json({ error: "Unauthorized: Missing token" });
+    }
+
+    const apiUrl = "https://api.typeauth.com/authenticate";
+
+    axios
+        .post(apiUrl, { key: token }, { headers: { "Content-Type": "application/json" } })
+        .then((response) => {
+            if (response.data.success) {
+                // Authentication successful
+                const valid = response.data.data[0].valid;
+                const rateLimit = response.data.data[0].rate_limit.remaining;
+                const remaining = response.data.data[0].remaining.remaining;
+                const enabled = response.data.data[0].enabled;
+
+                // Process the response data as needed
+                // ...
+
+                next();
+            } else {
+                // Authentication failed
+                return res.status(403).json({ error: "Forbidden: Invalid token" });
+            }
+        })
+        .catch((error) => {
+            // Handle API request error
+            console.error("Error: API request failed", error);
+            return res.status(500).json({ error: "Internal Server Error" });
+        });
+});
+
+// Other routes and middleware
+// ...
+
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});
+```
+
+## Python
+ ```python Python implementation
+import requests
+
+API_URL = 'https://api.typeauth.com/authenticate'
+
+def authenticate_user(token):
+    data = {'key': token}
+    headers = {'Content-Type': 'application/json'}
+
+    try:
+        response = requests.post(API_URL, json=data, headers=headers)
+        response.raise_for_status()
+
+        result = response.json()
+        if result['success']:
+            # Authentication successful
+            valid = result['data'][0]['valid']
+            rate_limit = result['data'][0]['rate_limit']['remaining']
+            remaining = result['data'][0]['remaining']['remaining']
+            enabled = result['data'][0]['enabled']
+
+            # Process the response data as needed
+            # ...
+        else:
+            # Authentication failed
+            print(f"Authentication failed: {result['message']}")
+    except requests.exceptions.RequestException as e:
+        # Handle API request error
+        print(f"Error: API request failed - {str(e)}")
+
+# Example usage
+token = request.headers.get('Authorization', '').replace('Bearer ', '')
+
+if not token:
+    # Token is missing
+    response.status_code = 401
+    response.json({'error': 'Unauthorized: Missing token'})
+else:
+    authenticate_user(token)
+```
+## PHP
+ ```php PHP implementation
+ <?php
+
+// Retrieve the token from the Authorization header
+$authorizationHeader = $_SERVER["HTTP_AUTHORIZATION"] ?? "";
+$token = str_replace("Bearer ", "", $authorizationHeader);
+
+if (empty($token)) {
+    // Token is missing
+    http_response_code(401);
+    echo json_encode(array("error" => "Unauthorized: Missing token"));
+    exit;
+}
+
+$apiUrl = "https://api.typeauth.com/authenticate";
+
+$data = array(
+    "key" => $token
+);
+
+$options = array(
+    "http" => array(
+        "header"  => "Content-type: application/json\r\n",
+        "method"  => "POST",
+        "content" => json_encode($data)
+    )
+);
+
+$context  = stream_context_create($options);
+$response = file_get_contents($apiUrl, false, $context);
+
+if ($response === false) {
+    // Handle API request error
+    http_response_code(500);
+    echo json_encode(array("error" => "Internal Server Error"));
+} else {
+    $result = json_decode($response, true);
+    if ($result["success"]) {
+        // Authentication successful
+        $valid = $result["data"][0]["valid"];
+        $rateLimit = $result["data"][0]["rate_limit"]["remaining"];
+        $remaining = $result["data"][0]["remaining"]["remaining"];
+        $enabled = $result["data"][0]["enabled"];
+        
+        // Process the response data as needed
+        // ...
+    } else {
+        // Authentication failed
+        http_response_code(403);
+        echo json_encode(array("error" => "Forbidden: Invalid token"));
+    }
+}
+ 
+```
+## Ruby
+ ```ruby Ruby implementation
+ require 'net/http'
+require 'json'
+
+API_URL = 'https://api.typeauth.com/authenticate'
+
+def authenticate_user(token)
+  uri = URI(API_URL)
+  data = { key: token }
+
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+
+  request = Net::HTTP::Post.new(uri.path)
+  request['Content-Type'] = 'application/json'
+  request.body = data.to_json
+
+  response = http.request(request)
+
+  if response.code == '200'
+    result = JSON.parse(response.body)
+    if result['success']
+      # Authentication successful
+      valid = result['data'][0]['valid']
+      rate_limit = result['data'][0]['rate_limit']['remaining']
+      remaining = result['data'][0]['remaining']['remaining']
+      enabled = result['data'][0]['enabled']
+
+      # Process the response data as needed
+      # ...
+    else
+      # Authentication failed
+      puts "Authentication failed: #{result['message']}"
+    end
+  else
+    # Handle API request error
+    puts "Error: API request failed with status code #{response.code}"
+  end
+rescue StandardError => e
+  # Handle any exceptions
+  puts "Error: #{e.message}"
+end
+
+# Example usage
+token = request.headers['Authorization'].gsub('Bearer ', '')
+
+if token.nil? || token.empty?
+  # Token is missing
+  response.status = 401
+  response.body = { error: 'Unauthorized: Missing token' }.to_json
+else
+  authenticate_user(token)
+end
+```

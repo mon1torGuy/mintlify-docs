@@ -1,33 +1,40 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "API Introduction"
+description: "This guide will help you get started with integrating typeauth into your application"
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+### Authentication
 
-## Welcome
+To access the typeauth API endpoints, you must include a Bearer authorization token in the Authorization header of your HTTP requests. This token is used to authenticate and authorize your API calls.
+You can find your Bearer token by following these steps:
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+Log in to your typeauth account at https://app.typeauth.com.
+Navigate to the Account section.
+Locate the API Tokens tab.
+Copy the provided Bearer token.
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+Here's an example of how to include the Bearer token in your API request:
 
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```http
+Authorization: Bearer YOUR_BEARER_TOKEN
 ```
+
+Replace `YOUR_BEARER_TOKEN` with the actual token you obtained from your typeauth account.
+
+### Request Format
+
+When making requests to the typeauth API, it is mandatory to include the `Content-Type` header with the value `application/json`. This header indicates that the request body is in JSON format.
+Here's an example of how to set the Content-Type header in your API request:
+
+```http
+Authorization: Bearer YOUR_BEARER_TOKEN
+Content-Type: application/json
+```
+
+Make sure to include this header in all your API requests to ensure proper communication with the typeauth API.
+
+<Note>
+  Please note that all API endpoints require Bearer authentication, except for
+  the token authentication endpoint. The token authentication endpoint is used
+  to validate the key/tokens and does not require prior authentication.
+</Note>

@@ -1,71 +1,40 @@
 ---
 title: Introduction
-description: 'Welcome to the home of your new documentation'
+description: "Welcome to the home of your new documentation"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero Dark"
-/>
+# Introduction to typeauth
 
-## Setting up
+Welcome to typeauth, a powerful authentication solution designed to streamline and secure your API endpoint. typeauth simplifies the implementation of user authentication, allowing you to focus on building your core application features.
 
-The first step to world-class documentation is setting up your editing environments.
+## What is typeauth?
 
-<CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
+typeauth is a comprehensive authentication service that provides a set of robust APIs and easy-to-use libraries to handle API authentication seamlessly. With typeauth, you can quickly implement token issuance, token authentication, rate limiting, JWT validation saving you time and effort.
 
-## Make it yours
+## Key Features
 
-Update your docs to your brand and add valuable content for the best user conversion.
+- **Token Management**: typeAuth provides a comprehensive token management system that enables you to generate and validate opaque tokens. These tokens are highly customizable and can be tailored to suit your specific authentication requirements. The opaque nature of the tokens ensures that sensitive information is not exposed, enhancing security. typeauth's token management system offers flexibility in terms of token format, expiration settings, and associated metadata. This allows you to fine-tune the behavior of your tokens based on your application's needs.
+- **Rate Limiting**: typeauth offers a powerful rate limiting feature that enhances the security and stability of your application. With rate limiting, you can define and enforce limits on the number of requests that can be made by a single API key within a specified time period. This helps protect your application from abuse, excessive traffic, and potential attacks. typeauth's rate limiting mechanism is highly configurable, allowing you to set granular limits based on your application's specific requirements. You can define rate limits per application and per API key, providing fine-grained control over the usage of your authentication endpoints.
+- **Refill Buckets**: typeauth introduces a sophisticated token management feature called "Refill Buckets" that enables you to control and limit the usage of your application's resources on a per-user basis. With Refill Buckets, you can set a maximum number of requests that a user can make within a specified time period, such as a day, week, or month. This feature ensures that users operate within predefined usage limits, preventing excessive consumption of resources. The innovative aspect of Refill Buckets is the ability to automatically replenish the token count at regular intervals. You can configure typeauth to add a specified number of tokens to each user's bucket on a daily, weekly, or monthly basis.
+- **JSON Web Tokens (JWT)**: typeauth provides comprehensive support for JSON Web Tokens (JWT), a widely adopted standard for secure authentication and information exchange. With typeauth, you can seamlessly integrate JWT authentication into your application. By uploading your JSON Web Key Set (JWKS) to typeauth, you can leverage our robust JWT validation capabilities. typeauth will efficiently validate the integrity and authenticity of the JWT, ensuring that it has been issued by a trusted source and has not been tampered with. Our validation process includes verifying the JWT signature against the provided JWKS, checking the token's expiration timestamp, and validating any additional claims or properties associated with the token.
+- **API Monitoring**: typeauth offers a comprehensive API monitoring solution that ensures the reliability and availability of your API endpoints. With typeauth's monitoring capabilities, you can proactively detect and respond to any issues or anomalies in your API's behavior. 
 
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+## Getting Started
+
+To begin using typeauth in your application, follow these steps:
+
+1. Sign up for a typeauth account at [https://app.typeauth.com](https://app.typeauth.com).
+2. Explore our documentation at [https://docs.typeauth.com](https://docs.typeauth.com) to understand how the solution works.
+3. Integrate typeauth into your application using our APIs and biolerplates.
+4. Customize and configure typeauth settings to match your application's requirements.
+5. Test and deploy your application with typeauth authentication.
+
+## Feedback and Support
+
+We value your feedback and are constantly improving typeauth based on user requests and suggestions. If you have any ideas, feature requests, or questions, please don't hesitate to reach out to us by replying to this email.
+
+Our team is dedicated to providing excellent support and assisting you throughout your integration journey. We look forward to helping you build secure and user-friendly authentication experiences with typeauth.
+
+Let's get started!
+
+The typeauth Team

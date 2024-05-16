@@ -37,7 +37,7 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development", "reference"]
+      "pages": ["introduction", "quickstart", "development", "reference", "boilerplates"]
     },
     {
       "group": "Essentials",
@@ -73,7 +73,7 @@
         "api-reference/keys/update-a-key",
         "api-reference/keys/update-a-keys-remaining-limit",
         "api-reference/keys/delete-a-key",
-        "api-reference/keys/vrify-authentication-key"
+        "api-reference/keys/verify-authentication-key"
 
       ]
     },
