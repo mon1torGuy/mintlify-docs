@@ -5,7 +5,7 @@
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
-  "openapi": ["/openapi3.json"],
+  "openapi": ["openapi.json"],
 
   "favicon": "/favicon.svg",
   "colors": {
@@ -20,7 +20,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:suport@typeauth.com"
+      "url": "mailto:support@typeauth.com"
     }
   ],
   "topbarCtaButton": {
@@ -30,7 +30,8 @@
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference"
+      "url": "api-reference",
+      "openapi": "openapi.json"
     }
   ],
   "anchors": [],
@@ -42,6 +43,7 @@
 
     {
       "group": "API Documentation",
+      
       "pages": ["api-reference/introduction"]
     },
     {
