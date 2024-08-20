@@ -40,6 +40,10 @@
       "group": "Get Started",
       "pages": ["introduction", "reference", "SDK", "boilerplates"]
     },
+    {
+      "group": "Features",
+      "pages": ["Abuse and Fraud Prevention", "LLM Caching", "API Caching", "Rate Limiting", "Authentication", "Authorization"]
+    },
 
     {
       "group": "API Documentation",
