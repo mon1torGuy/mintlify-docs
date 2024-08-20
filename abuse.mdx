@@ -1,4 +1,94 @@
 ---
 title: "Abuse and Fraud Prevention"
-description: "This guide will help you prevent abuse and fraud in your application"
+description: "This page will help you to understand how the Abuse and Fraud prevention works in TypeAuth.
+"
 ---
+
+## Overview
+
+TypeAuth currently provides two primary methods for abuse and fraud prevention:
+
+1. Rate Limiting
+2. Disposable Email Check
+
+These features help protect your application from potential misuse and ensure a more secure environment for your users.
+
+## Rate Limiting
+
+Rate limiting is a technique used to control the rate of requests or actions taken by a user or an application. This helps prevent abuse by limiting the number of operations that can be performed within a specific time frame.
+
+### Configuration
+
+In TypeAuth, rate limiting is configured at the application level. Here's how it works:
+
+1. **Enable/Disable:** Within your application settings, you can choose whether to enable or disable rate limiting.
+
+2. **Request Limit:** If enabled, you define the total number of requests allowed within a specified time window.
+
+3. **Time Window:** You set the time frame for which the request limit applies.
+
+4. **Token-based Tracking:** TypeAuth uses the authentication token to track and count requests for each user.
+
+### How it works
+
+Once configured, TypeAuth will:
+
+1. Track the number of requests made using each authentication token.
+2. Compare this number against the defined limit for the specified time window.
+3. Allow or deny requests based on whether the limit has been exceeded.
+
+### Example Configuration
+
+```json
+{ 
+    "limit": 10,
+    "timeWindow": 60 
+}
+```
+
+In this example, each authenticated user (identified by their token) would be allowed to make up to 10 requests per minute. the Time Window is defined in seconds.
+
+### Best Practices
+
+- Set rate limits that balance security with user experience.
+- Consider different rate limits for different types of operations or user roles.
+- Monitor rate limit hits to identify potential abuse or performance issues.
+
+## Disposable Email Check
+
+TypeAuth includes a feature to check if the email provided in a request belongs to a known list of disposable email services. This helps prevent fraud and abuse by identifying potentially suspicious sign-ups.
+
+### How it works
+
+1. TypeAuth checks the email against a security feed of known disposable email providers.
+2. You can specify where TypeAuth should look for the email:
+   - Header
+   - Body
+   - Query string
+
+3. You can also specify the exact path where TypeAuth should look for the email within the chosen location.
+
+### Configuration
+
+To set up the disposable email check, you need to specify:
+
+1. The location of the email (header, body, or query string)
+2. The path where the email can be found within that location
+
+(Note: Add specific configuration instructions or code examples here.)
+
+## Best Practices
+
+- Regularly update your security settings to adapt to new threats.
+- Monitor logs and analytics to identify potential abuse patterns.
+- Combine both rate limiting and disposable email checks for maximum protection.
+- Adjust rate limits based on your application's typical usage patterns.
+- Educate your users about these security measures to set appropriate expectations.
+
+## Conclusion
+
+By utilizing TypeAuth's Abuse and Fraud Prevention features, you can significantly enhance the security of your application. The combination of configurable rate limiting and disposable email checks provides a robust defense against potential misuse.
+
+Remember to regularly review and update your settings to maintain optimal protection against evolving threats.
+
+For more information or assistance, please contact our support team.
