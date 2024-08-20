@@ -38,8 +38,9 @@ If necessary, TypeAuth refills the key's request quota.
 7. Disposable Email Check
 TypeAuth performs a check to determine if the email associated with the request is from a known disposable email service.
 8. Cache
-Finally, TypeAuth interacts with the cache, either retrieving or storing information as needed.
-
+TypeAuth interacts with the cache, either retrieving or storing information as needed.
+9. Origin
+Finnally if request is not served from Cache will be forwarded to the origin.
 ## Process Flow Diagram
 
 Below is a visual representation of the TypeAuth order of operations:
