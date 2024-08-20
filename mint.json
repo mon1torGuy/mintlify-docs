@@ -42,7 +42,7 @@
     },
     {
       "group": "Features",
-      "pages": ["Abuse and Fraud Prevention", "LLM Caching", "API Caching", "Rate Limiting", "Authentication", "Authorization"]
+      "pages": ["Abuse and Fraud Prevention", "LLM Caching", "API Caching", "Rate Limiting", "Authentication"]
     },
 
     {
