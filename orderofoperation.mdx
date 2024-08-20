@@ -1,0 +1,47 @@
+---
+title: 'Order of Operations'
+description: 'TypeAuth order of operations'
+---
+
+# Overview 
+This document outlines the sequence of operations performed by TypeAuth when processing a request. Understanding this order is crucial for effectively implementing and troubleshooting your authentication and authorization flow.
+
+## Sequence of Operations
+TypeAuth performs the following checks in order:
+
+Authentication
+Key Enabled Check
+Key Expiration Check
+Rate Limit Check
+Remaining Requests Check
+Key Refill
+Disposable Email Check
+Cache
+
+## Let's explore each step in detail:
+1. Authentication
+TypeAuth first verifies the authentication of the request. This can be done using either:
+
+ - TypeAuth token
+ - JWT (JSON Web Token)
+
+2. Token Enabled Check
+Once authenticated, TypeAuth checks if the key associated with the request is enabled.
+3. Token Expiration Check
+If the key is enabled, TypeAuth then verifies whether the key has expired.
+4. Rate Limit Check
+TypeAuth checks if rate limiting is enabled for the application.
+5. Remaining Requests Check
+If rate limiting is enabled, TypeAuth checks if there are any remaining requests allowed within the current time window.
+6. Key Refill
+If necessary, TypeAuth refills the key's request quota.
+7. Disposable Email Check
+TypeAuth performs a check to determine if the email associated with the request is from a known disposable email service.
+8. Cache
+Finally, TypeAuth interacts with the cache, either retrieving or storing information as needed.
+
+## Process Flow Diagram
+
+Below is a visual representation of the TypeAuth order of operations:
+
+[order of operation](https://assets.typeauth.com/order-image.png)
