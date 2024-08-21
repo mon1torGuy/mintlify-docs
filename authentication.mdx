@@ -1,0 +1,78 @@
+---
+title: 'Authentication'
+description: 'How to authenticate your API request with TypeAuth'
+---
+# Overview
+
+TypeAuth offers two primary methods of authentication: Opaque Tokens and JSON Web Tokens (JWT). This document explains both methods, their characteristics, and how they integrate with TypeAuth's features.
+
+## Authentication Methods
+
+### 1. Opaque Tokens
+
+Opaque tokens are generated and managed by TypeAuth itself.
+
+#### Characteristics:
+- **Length**: Can range from 24 to 124 bytes
+- **Opacity**: As the name suggests, these tokens are opaque, meaning they don't contain any readable information about the user or session
+- **Security**: High security due to their randomness and lack of embedded information
+
+#### Usage:
+```http
+Authorization: Bearer <opaque_token>
+```
+
+### 2. JSON Web Tokens (JWT)
+
+TypeAuth can validate JWTs issued by your own authentication system.
+
+#### Characteristics:
+- **Standard**: Follows the JSON Web Token standard (RFC 7519)
+- **Flexibility**: Can contain custom claims and information
+- **Validation**: TypeAuth validates the token's signature and expiration
+
+#### Configuration:
+You can provide TypeAuth with:
+- JWKs (JSON Web Key Set) directly
+- URL where the JWKs are stored
+
+#### Usage:
+```http
+Authorization: Bearer <jwt_token>
+```
+
+## Integration with TypeAuth Features
+
+Regardless of the token type you choose (Opaque or JWT), all TypeAuth features apply uniformly:
+
+1. **Rate Limiting**: The configured rate limits for your application apply to both token types.
+2. **Refill Policies**: Any token refill policies set for your application work with both authentication methods.
+3. **Remain Policies**: Policies regarding remaining tokens are applied consistently across both methods.
+
+This uniform application ensures that your choice of authentication method doesn't impact the functionality and security measures provided by TypeAuth.
+
+## Choosing Between Opaque Tokens and JWTs
+
+### When to use Opaque Tokens:
+- You want TypeAuth to handle token generation and management
+- You prefer tokens that don't carry any information
+- You need varying token lengths for different security levels
+
+### When to use JWTs:
+- You have an existing JWT-based authentication system
+- You need to include custom claims in your tokens
+- You want to leverage the benefits of a standardized token format
+
+## Best Practices
+
+1. **Token Storage**: Always store tokens securely, regardless of the type.
+2. **HTTPS**: Use HTTPS for all communication involving tokens.
+3. **Token Expiration**: Set appropriate expiration times for your tokens.
+4. **Regular Rotation**: For JWKs, implement a regular rotation schedule.
+5. **Monitoring**: Keep track of token usage and any unusual patterns.
+
+## Conclusion
+
+TypeAuth's flexible authentication system allows you to choose between Opaque Tokens and JWTs based on your specific needs. Both methods integrate seamlessly with TypeAuth's features, ensuring consistent application of rate limits and other policies.
+
+For more detailed information on implementing either method, please refer to our API documentation or contact our support team.
