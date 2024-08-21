@@ -42,7 +42,11 @@
     },
     {
       "group": "Features",
-      "pages": ["authentication", "abuse", "llm", "orderofoperation"]
+      "pages": ["authentication", "abuse", "llm", "cache"]
+    },
+       {
+      "group": "Functionality",
+      "pages": ["snippets", "orderofoperation"]
     },
     {
       "group": "API Documentation",
