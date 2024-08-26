@@ -45,7 +45,7 @@
       "pages": ["authentication", "abuse", "llm", "cache"]
     },
        {
-      "group": "Functionality",
+      "group": "Concepts",
       "pages": ["snippets", "orderofoperation"]
     },
     {
