@@ -1,4 +1,70 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: 'Remain'
+description: 'Advanced rate limiting mechanism that allows you to set a pool of valid requests at the application level'
 ---
+# TypeAuth Remain Feature
+
+The TypeAuth Remain feature is an advanced rate limiting mechanism that allows you to set a pool of valid requests at the application level. This feature provides a powerful way to manage and distribute API usage across all keys issued by an application.
+
+## How It Works
+
+The Remain feature operates on the principle of a shared pool of requests for an entire application:
+
+1. **Application-Level Pool:** Set a total number of allowed requests for the entire application.
+2. **Shared Usage:** All API keys issued by the application draw from this shared pool.
+3. **Flexible Management:** The pool can be manually adjusted or automatically replenished using refill policies.
+
+## Key Concepts
+
+- **Shared Resource Pool:** Instead of individual limits per key, there's a collective limit for all keys.
+- **Dynamic Allocation:** Requests are consumed from the shared pool as they're made by any valid key.
+- **Adaptable Limits:** The pool of remaining requests can be adjusted based on needs or usage patterns.
+
+## Why It's Useful
+
+1. **Global Resource Control:** Manage overall API usage across all users of an application.
+2. **Flexible Distribution:** Allow for varied usage patterns among different users without individual restrictions.
+3. **Simplified Management:** Adjust limits for all users of an application at once.
+4. **Usage Insights:** Gain a clear view of total API consumption for an application.
+
+## Important Feature: Integration with Refill Policies
+
+The Remain feature becomes even more powerful when combined with [Refill](https://docs.typeauth.com/refill) Policies:
+
+- **Automatic Replenishment:** Set up regular increases to the remain pool using daily, weekly, or monthly refills.
+- **Maintain Availability:** Ensure a consistent level of available requests over time.
+- **Adaptive Capacity:** Automatically adjust to usage patterns and growth.
+
+## Manual Adjustments
+
+In addition to automatic refills, the remain pool can be manually adjusted:
+
+- **Increase Capacity:** Add more requests to the pool for temporary high-demand periods.
+- **Decrease Capacity:** Reduce the pool size if usage is lower than expected.
+- **One-time Boosts:** Provide extra capacity for special events or promotions.
+
+## Use Cases
+
+1. **SaaS Platforms:**
+   Manage API usage across all customers of a specific application or service tier.
+
+2. **Developer Ecosystems:**
+   Allocate a shared pool of requests for all third-party developers using your API.
+
+3. **Multi-tenant Applications:**
+   Control resource usage across all tenants while allowing flexibility in individual usage patterns.
+
+4. **Seasonal Businesses:**
+   Adjust the remain pool based on expected demand fluctuations throughout the year.
+
+5. **Freemium Models:**
+   Offer a shared pool of requests for free tier users, encouraging efficient use of resources.
+
+## Benefits of Combining Remain with Refill Policies
+
+1. **Predictable Capacity:** Maintain a consistent level of available requests over time.
+2. **Scalable Usage:** Automatically adapt to growing or changing usage patterns.
+3. **Efficient Resource Allocation:** Optimize API capacity based on actual usage trends.
+4. **Flexible Management:** Combine automatic refills with manual adjustments for optimal control.
+5. **Improved Planning:** Better forecast and manage API infrastructure needs.
+
