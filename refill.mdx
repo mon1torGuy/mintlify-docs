@@ -1,0 +1,58 @@
+---
+title: 'TypeAuth Refill'
+description: 'Refill Policies feature that allows regularly replenishing request quotas.'
+---
+# TypeAuth Refill Policies Feature
+
+TypeAuth's Refill Policies feature is an advanced rate limiting mechanism that allows for more dynamic and flexible control over API usage. This feature complements the basic rate limiting by introducing the concept of regularly replenishing request quotas.
+
+## How It Works
+
+Refill Policies allow you to add a specified number of valid requests to a token on a regular basis. The key components are:
+
+1. **Token:** Represents the entity being rate-limited (e.g., a user, an API key, or a specific action).
+2. **Quota:** The number of requests allowed for each token.
+3. **Refill Interval:** The frequency at which the quota is replenished. Common intervals include:
+   - Daily
+   - Weekly
+   - Monthly
+
+## Key Concepts
+
+- **Regular Replenishment:** Unlike standard rate limits that reset after a fixed time window, refill policies gradually add back available requests.
+- **Customizable Intervals:** Choose the refill frequency that best suits your business model.
+- **Quota Management:** Set different quotas for different user tiers or API endpoints.
+
+## Why It's Useful
+
+1. **Predictable Usage Patterns:** Customers can rely on a consistent number of available requests over time.
+2. **Flexible Resource Allocation:** Adapt to varying usage patterns without overly restricting access.
+3. **Tiered Service Models:** Easily implement different usage tiers for various customer levels.
+4. **Encourage Steady Usage:** Motivate users to spread their API calls over time rather than exhausting their quota all at once.
+
+## Use Cases for Customer Limits
+
+1. **SaaS API Access:**
+   Provide customers with a set number of API calls that refill daily or monthly, based on their subscription tier.
+
+2. **Freemium Models:**
+   Offer a limited number of free requests that replenish periodically, encouraging upgrades to paid plans for higher quotas.
+
+3. **Usage-Based Billing:**
+   Implement a base quota that refills regularly, with overage charges for additional usage.
+
+4. **Developer Programs:**
+   Allocate API quotas to third-party developers that reset on a scheduled basis to ensure fair access to your platform.
+
+5. **Content Publishing Platforms:**
+   Limit the number of articles or posts a user can publish, with quotas refreshing weekly or monthly.
+
+
+## Benefits for Customer Management
+
+1. **Predictable Costs:** Customers can better predict and manage their API usage and associated costs.
+2. **Fair Resource Distribution:** Prevent a small number of users from consuming all available resources.
+3. **Scalable Pricing Models:** Easily create tiered pricing plans based on different refill rates and quotas.
+4. **Improved Customer Satisfaction:** Provide a more consistent and reliable service experience.
+5. **Upsell Opportunities:** Encourage customers to upgrade to higher tiers for increased quotas or faster refill rates.
+

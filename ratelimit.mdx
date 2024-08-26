@@ -1,0 +1,53 @@
+---
+title: TypeAuth RateLimit'
+description: 'RateLimit feature is a powerful tool for controlling and managing the rate of requests to your API or application'
+---
+# Overview
+
+TypeAuth's RateLimit feature is a powerful tool for controlling and managing the rate of requests to your API or application. Unlike traditional rate limiting methods that often rely on IP addresses, TypeAuth's approach offers more flexibility and precision.
+
+## How It Works
+
+The RateLimit feature allows you to define:
+
+1. A specific request type
+2. A time window (in seconds)
+3. A maximum number of allowed requests within that time window
+
+What makes TypeAuth's RateLimit unique is its token-based approach. Instead of counting requests based on IP addresses or user identities, it uses tokens that can represent various entities or actions.
+
+## Key Concepts
+
+- **Token-based:** The rate limit is applied to tokens, which can represent users, actions, or any other entity you define.
+- **Customizable time windows:** You can set the duration for which the rate limit applies.
+- **Flexible request counting:** Define what constitutes a "request" based on your application's needs.
+
+## Why It's Useful
+
+1. **Granular Control:** By using tokens instead of IP addresses, you can apply rate limits more precisely to specific actions or user types.
+
+2. **Prevent Abuse:** Protect your API from being overwhelmed by too many requests from a single source or action.
+
+3. **Ensure Fair Usage:** Distribute your resources evenly among users or clients.
+
+4. **Scalability:** Token-based rate limiting can be more efficient in distributed systems compared to IP-based limiting.
+
+5. **Customization:** Adapt the rate limit to your specific business rules and requirements.
+
+## Use Cases
+
+1. **API Management:**
+   Limit the number of API calls a user or application can make within a given timeframe.
+
+2. **User Actions:**
+   Restrict how often a user can perform a specific action, like posting comments or sending messages.
+
+3. **Account Security:**
+   Limit login attempts or password reset requests to prevent brute-force attacks.
+
+4. **Resource-Intensive Operations:**
+   Control access to computationally expensive operations to ensure system stability.
+
+5. **Tiered Service Levels:**
+   Implement different rate limits for various subscription tiers or user roles.
+
