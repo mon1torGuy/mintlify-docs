@@ -1,0 +1,72 @@
+---
+title: 'Expiring Date'
+description: 'Expires feature is a feature that set a specific date and time at which a token will automatically become invalid'
+---
+
+# Overview
+
+The TypeAuth "expire" feature is a powerful tool for managing the lifecycle of authentication tokens. It allows you to set a specific date and time at which a token will automatically become invalid, enhancing security and control over access to your API or application.
+
+## How It Works
+
+The expire feature works by associating an expiration timestamp with each token:
+
+1. **Expiration Setting:** When creating or managing a token, you can specify an expiration date and time.
+2. **Automatic Invalidation:** Once the specified expiration time is reached, the token is automatically disabled.
+3. **Validation Check:** Every time the token is used, TypeAuth checks if the current time has exceeded the expiration time.
+
+## Key Concepts
+
+- **Temporal Security:** Limit the lifetime of access tokens to reduce the risk of unauthorized access.
+- **Granular Control:** Set different expiration times for different tokens based on security requirements.
+- **Automatic Management:** No need for manual intervention to disable expired tokens.
+
+## Why It's Useful
+
+1. **Enhanced Security:** Limit the window of opportunity for stolen or compromised tokens.
+2. **Compliance:** Meet regulatory requirements that mandate regular rotation of access credentials.
+3. **Resource Management:** Automatically clean up and invalidate unused or forgotten tokens.
+4. **User Session Control:** Implement forced logouts or re-authentication at specified intervals.
+5. **Temporary Access:** Easily grant time-limited access for specific purposes.
+
+## Use Cases
+
+1. **Short-lived Tokens:**
+   Generate tokens with short lifespans for sensitive operations.
+
+2. **Trial Periods:**
+   Create tokens that expire at the end of a free trial or demo period.
+
+3. **Contractor Access:**
+   Issue tokens that automatically expire at the end of a contract period.
+
+4. **Event-based Access:**
+   Provide access tokens that expire after a specific event or conference ends.
+
+5. **Scheduled Maintenance:**
+   Issue tokens that expire just before scheduled maintenance or system updates.
+
+
+
+## Best Practices
+
+1. **Appropriate Lifetimes:** Choose expiration times that balance security with user convenience.
+2. **Renewal Mechanisms:** Implement token renewal processes for long-term users.
+3. **Clear Communication:** Inform users about token expiration and how to obtain new tokens.
+4. **Timezone Consideration:** Use UTC for expiration times to avoid timezone-related issues.
+5. **Grace Periods:** Consider implementing short grace periods to prevent abrupt service interruptions.
+
+## Considerations
+
+1. **Clock Synchronization:** Ensure all systems involved in token validation have synchronized clocks.
+2. **Performance Impact:** Be aware that checking expiration adds a small overhead to token validation.
+3. **Revocation vs Expiration:** Understand that expiration is not a replacement for active token revocation in security-critical scenarios.
+4. **Backup and Recovery:** Consider how token expiration interacts with your backup and recovery processes.
+
+## Interaction with Other Features
+
+The expire feature can be used in conjunction with other TypeAuth features:
+
+- **Refill Policies:** Tokens can have both an expiration date and a refill policy, allowing for time-limited but renewable access.
+- **Rate Limiting:** Combine expiration with rate limiting for comprehensive access control.
+- **Detailed Responses:** When a token is rejected due to expiration, this can be communicated via the detailed response feature.
