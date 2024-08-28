@@ -42,7 +42,7 @@
     },
     {
       "group": "Features",
-      "pages": ["authentication", "abuse", "llm", "cache", "ratelimit", "refill", "remain", "jwt"]
+      "pages": ["authentication", "abuse", "cache", "ratelimit", "refill", "remain", "jwt"]
     },
        {
       "group": "Concepts",
