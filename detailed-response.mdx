@@ -1,0 +1,86 @@
+---
+title: 'Detailed Response'
+description: 'This feature enhances error reporting by providing more specific information about why a request has been blocked.'
+---
+
+# Overview
+
+The TypeAuth gateway's "detailed response" feature enhances error reporting by providing more specific information about why a request was blocked or dropped. This feature is particularly useful for debugging, monitoring, and improving the overall security and performance of your API.
+
+## How It Works
+
+By default, the TypeAuth gateway responds with standard HTTP status codes (like 403 or 404) when a request is blocked or encounters an error. However, when the "detailed response" feature is enabled, the gateway includes an additional field in the response called `detail`. This field provides more specific information about which service or check caused the request to be blocked.
+
+## Enabling Detailed Responses
+
+To enable detailed responses, you typically need to configure your TypeAuth gateway settings. This might be done through a configuration file, environment variable, or API call, depending on your setup.
+
+
+## Standard vs Detailed Responses
+
+### Standard Response
+```json
+{
+  "status": 403,
+  "message": "Forbidden"
+}
+```
+
+### Detailed Response
+```json
+{
+  "status": 403,
+  "message": "Forbidden",
+  "detail": "Rate limit exceeded"
+}
+```
+
+## Possible Detail Values
+
+The `detail` field can contain various values, including but not limited to:
+
+- "Authentication failed"
+- "Rate limit exceeded"
+- "Invalid API key"
+- "Insufficient permissions"
+- "IP address blocked"
+- "Quota exceeded"
+- "Request signature invalid"
+
+## Benefits of Detailed Responses
+
+1. **Improved Debugging:** Quickly identify the specific reason for blocked requests.
+2. **Enhanced Monitoring:** Gain insights into which security measures are most active.
+3. **Better Client Communication:** Provide more informative error messages to API consumers.
+4. **Streamlined Troubleshooting:** Reduce time spent investigating API issues.
+5. **Security Insights:** Understand patterns in blocked requests to refine security measures.
+
+## Use Cases
+
+1. **Development and Testing:** 
+   Enable detailed responses in development environments to quickly identify and fix issues.
+
+2. **API Monitoring:** 
+   Use detailed responses to create more granular monitoring and alerting systems.
+
+3. **Client Support:** 
+   Provide better guidance to API clients when they encounter errors.
+
+4. **Security Analysis:** 
+   Analyze patterns in blocked requests to identify potential security threats or misconfigurations.
+
+5. **Performance Optimization:** 
+   Identify which checks are most frequently causing requests to be blocked, potentially highlighting areas for optimization.
+
+
+
+## Considerations
+
+1. **Security:** Be cautious about exposing detailed error information in production environments, as it could potentially be used by malicious actors.
+
+2. **Performance:** Generating detailed responses might have a slight impact on performance, though it's usually negligible.
+
+3. **Logging:** Consider logging detailed responses for internal use, even if you don't send them to clients in production.
+
+4. **Client Education:** If exposing detailed responses to clients, provide documentation on how to interpret and handle these detailed error messages.
+
