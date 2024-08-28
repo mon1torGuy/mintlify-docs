@@ -38,7 +38,7 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "reference", "SDK", "boilerplates"]
+      "pages": ["introduction", "reference", "SDK"]
     },
     {
       "group": "Features",
