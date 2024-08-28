@@ -1,0 +1,88 @@
+---
+title: "API Cache"
+description: "This guide will help you to understand how TypeAuth cache works"
+---
+
+## Overview
+
+TypeAuth's LLM (Large Language Model) caching feature allows you to efficiently run language models while optimizing for performance and cost. This document explains how the feature works, its benefits, and how to configure it for your needs.
+
+## Key Features
+
+- Run open-source models directly through TypeAuth
+- Use popular models like OpenAI or Claude with your own API keys
+- Efficient caching using a vector database
+- Configurable verbosity levels
+- Adjustable similarity threshold for cache hits
+
+## Models supported
+
+#### Open Source models
+- Meta
+  - LLama 3 8b
+  - LLama 3.1 8b
+- Mistral
+  - Mistral 7b v0.2
+#### Propietary Models
+- OpenAI
+  - gpt-4o 
+  - gpt-4o-mini
+  - gpt-4-turbo
+- Claude
+  - Claude 3.5 Sonnett
+  - Claude 3 Opus
+  - Claude 3 Sonnett
+  - Claude 3 Haikut
+
+## How It Works
+
+1. **Model Execution**: You can run language models in two ways:
+   - Open-source models: Executed directly by TypeAuth
+   - Third-party models (e.g., OpenAI, Claude): Require your API key
+
+2. **Caching Mechanism**: TypeAuth uses a vector database to cache queries and their responses.
+
+3. **Cache Lookup**: When a new query is received, TypeAuth checks the cache for similar existing queries.
+
+4. **Response Serving**: 
+   - If a similar query is found in the cache, the cached response is served.
+   - If no similar query is found, the request is sent to the chosen model.
+
+5. **Billing**: For open-source models run by TypeAuth, billing is based on neurons used.
+
+## Configuration
+
+### Verbosity Levels
+
+You can control the length and detail of responses by setting a verbosity level:
+
+1. Concise and short
+2. Moderately explanatory
+3. Very extensive
+- Default: No specified verbosity (model default)
+
+### Similarity Threshold
+
+The similarity threshold determines when to serve cached responses:
+
+- Default: 97%
+- Lower threshold (e.g., 95%): More lenient matching, fewer requests to the origin
+- Higher threshold (e.g., 99%): Stricter matching, more requests to the origin
+
+## Benefits
+
+1. **Cost Reduction**: By serving cached responses for similar queries, you can significantly reduce the number of tokens consumed.
+
+2. **Improved Response Time**: Cached responses are served faster than generating new ones.
+
+3. **Consistency**: Similar queries receive consistent responses.
+
+4. **Flexibility**: Choose between open-source models or bring your own API key for third-party models.
+
+## Best Practices
+
+1. Start with the default similarity threshold and adjust based on your specific needs.
+2. Monitor cache hit rates and adjust the similarity threshold accordingly.
+3. Use appropriate verbosity levels to balance between detailed responses and token consumption.
+4. Regularly review and update your cached responses to ensure information accuracy.
+
