@@ -1,0 +1,87 @@
+---
+title: 'Routing'
+description: 'How traffic is routed to the origin.'
+---
+
+## Current Routing Mechanism
+
+TypeAuth's current routing system is designed with simplicity and efficiency in mind. Here's how it works:
+
+### 1. Origin Hostname Definition
+
+When you create an application in TypeAuth, you define an origin hostname. This hostname serves as the destination for all traffic passing through the TypeAuth proxy.
+
+### 2. Path Preservation
+
+One of the key features of TypeAuth's routing is path preservation. When a request comes in, TypeAuth maintains the original path and passes it along to the origin server. This means that if a request comes in for /api/users, it will be forwarded to your-origin-hostname.com/api/users.
+Additionally, TypeAuth enhances the forwarded request by adding two important headers:
+
+- `x-TypeAuth-AppID`: Contains the ID of the application
+- `x-TypeAuth-App`: Contains the name of the application
+
+```bash
+x-TypeAuth-AppID: 123454879fsdafdsa
+x-TypeAuth-App: myapiapplication
+```
+
+These headers allow your origin server to identify which application the traffic is destined for, providing valuable context for request handling and logging.
+
+### Example:
+
+Let's say you've set up an application in TypeAuth with the following configuration:
+
+- Application Name: MyAwesomeAPI
+- Origin Hostname: api.myawesomecompany.com
+
+When a client makes a request to `https://myawesomeapi.typeauth.io/users/profile`, TypeAuth will:
+
+1. Receive the request
+2. Apply any necessary security checks (authentication, rate limiting, etc.)
+3. Forward the request to `https://api.myawesomecompany.com/users/profile` adding the above headers
+
+This straightforward approach ensures that your existing API structure remains intact while benefiting from TypeAuth's security features.
+
+## Upcoming Routing Enhancements (Coming Soon)
+
+While the current routing system serves many use cases well, we understand that modern API architectures often require more flexibility. That's why we're excited to announce that we're working on advanced routing capabilities. These new features will provide you with greater control over how requests are handled and forwarded.
+
+### 1. URL Rewriting
+
+Soon, TypeAuth will allow you to rewrite URLs before they're sent to your origin server. This powerful feature will enable you to:
+
+- Modify paths to match your backend structure
+- Add or remove path segments
+- Change query parameters
+
+For example, you might want to rewrite all requests from `/api/v1/*` to `/internal-api/*` before they reach your server.
+
+### 2. Request Redirection
+
+In addition to URL rewriting, we're implementing request redirection. This will allow you to:
+
+- Redirect requests to different backends based on conditions
+- Implement A/B testing at the API level
+- Manage traffic for blue/green deployments
+
+For instance, you could redirect 10% of your traffic to a new API version for testing purposes.
+
+### 3. Conditional Routing
+
+Our new routing engine will support conditional routing based on various factors such as:
+
+- Request headers
+- Client IP
+- Time of day
+- Custom rules you define
+
+This will give you unprecedented control over your API traffic flow.
+
+## Benefits of Enhanced Routing
+
+These new routing capabilities will bring several benefits:
+
+1. **Increased Flexibility:** Adapt to complex API architectures and microservices environments.
+2. **Easier Migration:** Gradually migrate from old API versions to new ones without changing client code.
+3. **Improved Testing:** Facilitate A/B testing and canary releases.
+4. **Enhanced Security:** Implement more granular access controls based on routing rules.
+5. **Simplified Management:** Manage multiple backend services through a single TypeAuth configuration.
