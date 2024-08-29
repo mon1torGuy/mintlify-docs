@@ -46,7 +46,7 @@
     },
        {
       "group": "Concepts",
-      "pages": ["snippets", "orderofoperation"]
+      "pages": ["routing", "snippets", "orderofoperation"]
     },
     {
       "group": "API Documentation",
