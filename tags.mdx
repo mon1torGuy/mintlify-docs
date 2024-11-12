@@ -1,4 +1,136 @@
 ---
 title: "Tags"
-description: "This guide will help you prevent abuse and fraud in your application"
+description: "What and how to use TypeAuth Tags"
 ---
+
+## Creating Tags
+
+Tags can be created and managed through two interfaces:
+
+### Dashboard
+
+The TypeAuth dashboard provides an intuitive interface for tag management:
+
+1. Navigate to the Tags section
+2. Click "Create New Tag"
+3. Enter your tag name
+4. Save your changes
+
+### API
+
+Create tags programmatically using the Tags API endpoint:
+
+```http
+POST /tags
+Content-Type: application/json
+
+{
+  "name": "thisismytag",
+}
+```
+
+## Tagging Resources
+
+### Applications
+
+Tag your applications to organize them by:
+- Environment (production, staging, development)
+- Business unit
+- Customer segment
+- Geographic region
+
+```http
+POST /api/v1/applications/{application_id}/tags
+Content-Type: application/json
+
+{
+  "tags": [
+    {"key": "environment", "value": "production"},
+    {"key": "customer_tier", "value": "enterprise"}
+  ]
+}
+```
+
+### API Keys
+
+Add tags to your API keys to:
+- Track feature-specific usage
+- Monitor integrations
+- Analyze customer behavior
+
+```http
+POST /api/v1/keys/{key_id}/tags
+Content-Type: application/json
+
+{
+  "tags": [
+    {"key": "feature", "value": "auth"},
+    {"key": "region", "value": "eu-west"}
+  ]
+}
+```
+
+## Filtering
+
+Filter your resources using tag-based queries:
+
+```http
+GET /api/v1/applications?tags[environment]=production
+GET /api/v1/keys?tags[customer_tier]=enterprise
+```
+
+## Usage Analysis
+
+Tags enable powerful usage analysis capabilities:
+
+- **Customer Segmentation**: Track API usage across different customer segments
+- **Feature Adoption**: Monitor which features are being used most frequently
+- **Environment Analysis**: Compare usage patterns across different environments
+- **Billing Support**: Generate accurate usage-based billing reports
+- **Custom Reporting**: Create filtered reports based on specific tags
+
+## Best Practices
+
+1. **Consistent Naming**: Use standardized naming conventions for your tags
+2. **Descriptive Keys**: Keep tag keys short but meaningful
+3. **Tag Limits**: Maintain a manageable number of unique tags
+4. **Documentation**: Keep your team aligned by documenting your tagging strategy
+5. **Regular Reviews**: Periodically audit and clean up unused tags
+
+## Sample Tag Structure
+
+Here are some common tag structures:
+
+| Resource Type | Tag Key | Example Values |
+|--------------|---------|----------------|
+| Application  | environment | production, staging, development |
+| Application  | customer_tier | enterprise, pro, starter |
+| API Key      | feature | auth, admin, analytics |
+| API Key      | region | us-east, eu-west, asia-pacific |
+
+## Tag Constraints
+
+- Name must be between 3 and 50 characters
+- Maximum of 5 tags per resource
+- Names can only contain alphanumeric characters and underscores
+
+## API Reference
+
+### [Create Tag](https://docs.typeauth.com/api-reference/tags/create-a-new-tag)
+```http
+POST /tag
+```
+
+### [List Tags](https://docs.typeauth.com/api-reference/tags/list-all-tags)
+```http
+GET /tag}
+```
+
+### [Delete Tag](https://docs.typeauth.com/api-reference/tags/create-a-new-tag)
+```http
+DELETE /tag/{tag_id}
+```
+
+## Need Help?
+
+If you need assistance with tags or have questions about best practices, please contact our support team or refer to our API documentation for detailed examples.

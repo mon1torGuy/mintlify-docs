@@ -460,6 +460,22 @@
 				}
 			}
 		},
+		"/tags/{tag_id}": {
+			"delete": {
+				"tags": ["Tags"],
+				"summary": "Delete a tag",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Tag deleted successfully"
+					}
+				}
+			}
+		},
 		"/tags/create": {
 			"post": {
 				"tags": ["Tags"],
