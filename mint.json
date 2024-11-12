@@ -41,13 +41,15 @@
 			"pages": ["introduction", "reference", "SDK", "boilerplates"]
 		},
 		{
-			"group": "Features",
+			"group": "Functionality",
 			"pages": [
-				"Abuse and Fraud Prevention",
-				"LLM Caching",
-				"API Caching",
-				"Rate Limiting",
-				"Authentication"
+				"application",
+				"token",
+				"jwt",
+				"monitors",
+				"routing",
+				"tags",
+				"security"
 			]
 		},
 
