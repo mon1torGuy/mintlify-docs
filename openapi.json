@@ -7,7 +7,7 @@
 	},
 	"servers": [
 		{
-			"url": "https://api.typeauth.com/v1"
+			"url": "https://api.typeauth.com"
 		}
 	],
 	"tags": [
