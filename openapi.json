@@ -1,1202 +1,900 @@
 {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "TypeAuth API",
-    "version": "1.0.0",
-    "description": "API documentation for TypeAuth",
-    "x-logo": {
-      "url": "https://developers.userzero.io/typeauth-light.png",
-      "backgroundColor": "#FFFFFF",
-      "altText": "typeauth logo"
-    }
-  },
-  "servers": [
-    {
-      "url": "https://api.typeauth.com"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Applications",
-      "description": "Endpoints related to applications"
-    },
-    {
-      "name": "Keys",
-      "description": "Endpoints related to keys"
-    },
-    {
-      "name": "JWTs",
-      "description": "Endpoints related to JWTs"
-    },
-    {
-      "name": "Monitors",
-      "description": "Endpoints related to monitors"
-    },
-    {
-      "name": "Feedback",
-      "description": "Provide Feedback"
-    }
-  ],
-  "paths": {
-    "/{accId}/applications/create": {
-      "post": {
-        "tags": ["Applications"],
-        "operationId": "createApplication",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "Create a new application",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestApplicationSchema"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Application created successfully"
-          },
-          "400": {
-            "description": "Invalid request body or application name already exists"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/applications": {
-      "get": {
-        "tags": ["Applications"],
-        "operationId": "getApplications",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "List all applications",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "404": {
-            "description": "No applications found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/applications/{id}": {
-      "get": {
-        "tags": ["Applications"],
-        "operationId": "getApplicationbyID",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "Retrieve an application by ID",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "404": {
-            "description": "Application not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "put": {
-        "tags": ["Applications"],
-        "operationId": "updateApplication",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "Update an application",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "prefix": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "400": {
-            "description": "Invalid JSON syntax"
-          },
-          "404": {
-            "description": "Account or application not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "delete": {
-        "tags": ["Applications"],
-        "operationId": "deleteApplication",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "Delete an application",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Application deleted successfully"
-          },
-          "404": {
-            "description": "Account or application not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/keys": {
-      "get": {
-        "tags": ["Keys"],
-        "operationId": "getKeys",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "List all keys",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/applications/{appId}/keys": {
-      "get": {
-        "tags": ["Keys"],
-        "operationId": "getKeysbyApplication",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "Retrieve keys by appId",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "404": {
-            "description": "Application not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "post": {
-        "tags": ["Keys"],
-        "summary": "Create a key",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestKeySchema"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Key created successfully"
-          },
-          "400": {
-            "description": "Invalid request body"
-          },
-          "404": {
-            "description": "Application or account not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/authenticate": {
-      "post": {
-        "tags": ["Keys"],
-        "summary": "Verify authentication key",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "token": {
-                    "type": "string"
-                  },
-                  "appId": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "400": {
-            "description": "Key is required"
-          },
-          "403": {
-            "description": "Key is disabled or has expired"
-          },
-          "429": {
-            "description": "Rate limit exceeded"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/applications/{appId}/keys/{keyId}/verify": {
-      "get": {
-        "tags": ["Keys"],
-        "summary": "Verify a key",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "keyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Key is valid"
-          },
-          "403": {
-            "description": "Key is disabled or has expired"
-          },
-          "404": {
-            "description": "Key not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/applications/{appId}/keys/{keyId}": {
-      "get": {
-        "tags": ["Keys"],
-        "summary": "Retrieve a key by ID",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "keyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "404": {
-            "description": "Key not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "post": {
-        "tags": ["Keys"],
-        "summary": "Update a key",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "keyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "value": {
-                    "type": "string"
-                  },
-                  "environment": {
-                    "type": "string"
-                  },
-                  "expires": {
-                    "type": "integer"
-                  },
-                  "metadata": {
-                    "type": "object"
-                  },
-                  "ratelimit": {
-                    "type": "object"
-                  },
-                  "refill": {
-                    "type": "object"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "400": {
-            "description": "Invalid JSON syntax"
-          },
-          "404": {
-            "description": "Key not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/applications/{appId}/keys/{keyId}/refill": {
-      "put": {
-        "tags": ["Keys"],
-        "summary": "Update a key's remaining limit",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "keyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "refill": {
-                    "type": "integer"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "400": {
-            "description": "Invalid JSON syntax"
-          },
-          "404": {
-            "description": "Key not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/applications/{appId}/keys/{keyId}/delete": {
-      "delete": {
-        "tags": ["Keys"],
-        "summary": "Delete a key",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "keyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Key deleted successfully"
-          },
-          "404": {
-            "description": "Key not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/applications/{appId}/keys/{keyId}/usage": {
-      "get": {
-        "tags": ["Keys"],
-        "summary": "Retrieve usage numbers",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "keyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "404": {
-            "description": "Key not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/applications/{appId}/analytics": {
-      "get": {
-        "tags": ["Keys"],
-        "summary": "Retrieve analytics",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/jwts": {
-      "get": {
-        "tags": ["JWTs"],
-        "summary": "List JWTs",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "404": {
-            "description": "No JWTs found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "delete": {
-        "tags": ["JWTs"],
-        "summary": "Delete JWT",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "JWT deleted successfully"
-          },
-          "404": {
-            "description": "JWT not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/jwts/create": {
-      "post": {
-        "tags": ["JWTs"],
-        "summary": "Create JWT",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestJWKCreateSchema"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "JWKs added successfully"
-          },
-          "400": {
-            "description": "Invalid request body"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/{accId}/monitors": {
-      "post": {
-        "tags": ["Monitors"],
-        "summary": "Create a monitor",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestMonitorDashSchema"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Monitor created successfully"
-          },
-          "400": {
-            "description": "Invalid request body"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "get": {
-        "tags": ["Monitors"],
-        "summary": "Get monitors",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "404": {
-            "description": "Monitors not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "put": {
-        "tags": ["Monitors"],
-        "summary": "Update monitor",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestMonitorUpdateSchema"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "400": {
-            "description": "Invalid request body"
-          },
-          "404": {
-            "description": "Monitor not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "delete": {
-        "tags": ["Monitors"],
-        "summary": "Delete monitor",
-        "parameters": [
-          {
-            "name": "accId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Monitor deleted successfully"
-          },
-          "401": {
-            "description": "Query parameters missing"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/dashboard/feedback": {
-      "get": {
-        "tags": ["Feedback"],
-        "summary": "Get feedback",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "post": {
-        "tags": ["Feedback"],
-        "summary": "Create feedback",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Feedback created successfully"
-          },
-          "400": {
-            "description": "Invalid JSON syntax"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "bearerFormat": "account typeauth key",
-        "type": "http",
-        "scheme": "bearer"
-      }
-    },
-    "schemas": {
-      "RequestApplicationSchema": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "ratelimit": {
-            "type": "object"
-          },
-          "refill": {
-            "type": "object"
-          },
-          "remaining": {
-            "type": "integer"
-          },
-          "keyType": {
-            "type": "string"
-          },
-          "jwk": {
-            "type": "string"
-          },
-          "expires": {
-            "type": "integer"
-          },
-          "byteLength": {
-            "type": "integer"
-          },
-          "description": {
-            "type": "string"
-          },
-          "prefix": {
-            "type": "string"
-          }
-        }
-      },
-      "RequestKeySchema": {
-        "type": "object",
-        "properties": {
-          "byteLength": {
-            "type": "integer"
-          },
-          "expires": {
-            "type": "integer"
-          },
-          "metadata": {
-            "type": "object"
-          },
-          "remaining": {
-            "type": "integer"
-          },
-          "ratelimit": {
-            "type": "object"
-          },
-          "refill": {
-            "type": "object"
-          }
-        }
-      },
-      "RequestJWKCreateSchema": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "jsonKey": {
-            "type": "object",
-            "properties": {
-              "keys": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/JWKsType"
-                }
-              }
-            }
-          },
-          "jwtEndpoint": {
-            "type": "string"
-          }
-        }
-      },
-      "JWKsType": {
-        "type": "object",
-        "properties": {
-          "kty": {
-            "type": "string"
-          },
-          "use": {
-            "type": "string"
-          },
-          "crv": {
-            "type": "string"
-          },
-          "kid": {
-            "type": "string"
-          },
-          "x": {
-            "type": "string"
-          },
-          "y": {
-            "type": "string"
-          },
-          "alg": {
-            "type": "string"
-          }
-        }
-      },
-      "RequestMonitorDashSchema": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "status_code": {
-            "type": "integer"
-          }
-        }
-      },
-      "RequestMonitorUpdateSchema": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "mon_status": {
-            "type": "boolean"
-          },
-          "status_code": {
-            "type": "integer"
-          }
-        }
-      }
-    }
-  }
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Type Auth API",
+		"description": "API for managing applications, authentication, monitoring, and security features",
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "https://api.typeauth.com/v1"
+		}
+	],
+	"tags": [
+		{
+			"name": "Applications",
+			"description": "Application management endpoints"
+		},
+		{
+			"name": "Keys",
+			"description": "API key management endpoints"
+		},
+		{
+			"name": "JWT",
+			"description": "JWT configuration endpoints"
+		},
+		{
+			"name": "JWK",
+			"description": "JWK (JSON Web Key) management endpoints"
+		},
+		{
+			"name": "Security",
+			"description": "Security and firewall configuration endpoints"
+		},
+		{
+			"name": "Abuse Prevention",
+			"description": "Abuse prevention and rate limiting endpoints"
+		},
+		{
+			"name": "Monitoring",
+			"description": "Application monitoring endpoints"
+		},
+		{
+			"name": "Routing",
+			"description": "Route configuration endpoints"
+		},
+		{
+			"name": "Tags",
+			"description": "Tag management endpoints"
+		}
+	],
+	"paths": {
+		"/applications/create": {
+			"post": {
+				"tags": ["Applications"],
+				"summary": "Create a new application",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateApplicationRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Application created successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApplicationResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/applications": {
+			"get": {
+				"tags": ["Applications"],
+				"summary": "List all applications",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Applications retrieved successfully"
+					}
+				}
+			}
+		},
+		"/applications/{id}": {
+			"get": {
+				"tags": ["Applications"],
+				"summary": "Get application details",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Application details retrieved successfully"
+					}
+				}
+			},
+			"patch": {
+				"tags": ["Applications"],
+				"summary": "Update application",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Application updated successfully"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Applications"],
+				"summary": "Delete application",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Application deleted successfully"
+					}
+				}
+			}
+		},
+		"/keys/create": {
+			"post": {
+				"tags": ["Keys"],
+				"summary": "Create new API keys",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateKeyRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Keys created successfully"
+					}
+				}
+			}
+		},
+		"/keys/{keyId}/verify": {
+			"get": {
+				"tags": ["Keys"],
+				"summary": "Verify a key",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "keyId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Key verified successfully"
+					}
+				}
+			}
+		},
+		"/jwk": {
+			"get": {
+				"tags": ["JWK"],
+				"summary": "List all JWKs",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "JWKs retrieved successfully"
+					}
+				}
+			}
+		},
+		"/jwk/create": {
+			"post": {
+				"tags": ["JWK"],
+				"summary": "Create a new JWK",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateJWKRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "JWK created successfully"
+					}
+				}
+			}
+		},
+		"/jwt": {
+			"get": {
+				"tags": ["JWT"],
+				"summary": "List all JWTs",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "JWTs retrieved successfully"
+					}
+				}
+			}
+		},
+		"/jwt/create": {
+			"post": {
+				"tags": ["JWT"],
+				"summary": "Create a new JWT",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateJWTRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "JWT created successfully"
+					}
+				}
+			}
+		},
+		"/security/geoblock/{id}": {
+			"put": {
+				"tags": ["Security"],
+				"summary": "Update geoblocking settings",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Geoblocking settings updated successfully"
+					}
+				}
+			}
+		},
+		"/abuse": {
+			"get": {
+				"tags": ["Abuse Prevention"],
+				"summary": "List all abuse prevention profiles",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Abuse prevention profiles retrieved successfully"
+					}
+				}
+			}
+		},
+		"/abuse/create": {
+			"post": {
+				"tags": ["Abuse Prevention"],
+				"summary": "Create a new abuse prevention profile",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateAbuseProfileRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Abuse prevention profile created successfully"
+					}
+				}
+			}
+		},
+		"/monitor/create": {
+			"post": {
+				"tags": ["Monitoring"],
+				"summary": "Create a new monitor",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateMonitorRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Monitor created successfully"
+					}
+				}
+			}
+		},
+		"/routing": {
+			"get": {
+				"tags": ["Routing"],
+				"summary": "List all routing profiles",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Routing profiles retrieved successfully"
+					}
+				}
+			}
+		},
+		"/routing/create": {
+			"post": {
+				"tags": ["Routing"],
+				"summary": "Create a new routing profile",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateRoutingRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Routing profile created successfully"
+					}
+				}
+			}
+		},
+		"/tags": {
+			"get": {
+				"tags": ["Tags"],
+				"summary": "List all tags",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Tags retrieved successfully"
+					}
+				}
+			}
+		},
+		"/tags/create": {
+			"post": {
+				"tags": ["Tags"],
+				"summary": "Create a new tag",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTagRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Tag created successfully"
+					}
+				}
+			}
+		}
+	},
+
+	"components": {
+		"schemas": {
+			"ApplicationResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Application"
+						}
+					}
+				}
+			},
+			"Application": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"domain": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"originHostname": {
+						"type": "string"
+					},
+					"detailResponse": {
+						"type": "boolean"
+					},
+					"auth_id": {
+						"type": "string"
+					},
+					"llmcache_id": {
+						"type": "string"
+					},
+					"abuse_id": {
+						"type": "string"
+					},
+					"tags": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"KeyResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Key"
+						}
+					}
+				}
+			},
+			"Key": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"value": {
+						"type": "string"
+					},
+					"enabled": {
+						"type": "boolean"
+					},
+					"expires": {
+						"type": "integer",
+						"nullable": true
+					},
+					"remaining": {
+						"type": "integer",
+						"nullable": true
+					},
+					"ratelimit": {
+						"type": "object",
+						"nullable": true
+					},
+					"refill": {
+						"type": "object",
+						"nullable": true
+					}
+				}
+			},
+			"JWKResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/JWK"
+						}
+					}
+				}
+			},
+			"JWK": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"jwk": {
+						"type": "object"
+					},
+					"kid": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"jwtEndpoint": {
+						"type": "string"
+					},
+					"lastChecked": {
+						"type": "integer"
+					}
+				}
+			},
+			"JWTResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/JWT"
+						}
+					}
+				}
+			},
+			"JWT": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"path": {
+						"type": "string"
+					},
+					"exp": {
+						"type": "integer"
+					},
+					"nbf": {
+						"type": "integer"
+					},
+					"kid": {
+						"type": "string"
+					},
+					"keys": {
+						"type": "string"
+					},
+					"jwk": {
+						"type": "string"
+					}
+				}
+			},
+			"SecurityResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/SecuritySetting"
+						}
+					}
+				}
+			},
+			"SecuritySetting": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"isGeoBlock": {
+						"type": "boolean"
+					},
+					"geoBlock": {
+						"type": "string",
+						"nullable": true
+					},
+					"isFirewall": {
+						"type": "boolean"
+					}
+				}
+			},
+			"AbuseProfileResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/AbuseProfile"
+						}
+					}
+				}
+			},
+			"AbuseProfile": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"blocklist": {
+						"type": "string"
+					},
+					"exceptions": {
+						"type": "string"
+					},
+					"path": {
+						"type": "string"
+					},
+					"globalratelimit": {
+						"type": "object",
+						"properties": {
+							"Requests": {
+								"type": "integer"
+							},
+							"Interval": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			"MonitorResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Monitor"
+						}
+					}
+				}
+			},
+			"Monitor": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"status_code": {
+						"type": "integer"
+					},
+					"mon_status": {
+						"type": "boolean"
+					},
+					"responseStatus": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"RoutingResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/RoutingProfile"
+						}
+					}
+				}
+			},
+			"RoutingProfile": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"endpoints": {
+						"type": "string"
+					},
+					"app_name": {
+						"type": "string",
+						"nullable": true
+					}
+				}
+			},
+			"TagResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Tag"
+						}
+					}
+				}
+			},
+			"Tag": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				}
+			},
+			"ErrorResponse": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		}
+	}
 }
