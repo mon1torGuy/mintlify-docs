@@ -1,4 +1,229 @@
 ---
 title: "Routing"
-description: "This guide will help you prevent abuse and fraud in your application"
+description: "Learn how the traffic flows in TypeAuth"
 ---
+
+# Routing
+
+TypeAuth's routing system provides flexible URL transformation and request forwarding capabilities. It allows you to define how incoming requests are modified before being forwarded to your origin servers.
+
+## Default Routing
+
+When an application doesn't have a specific routing profile configured, TypeAuth uses default routing behavior:
+
+### Default Behavior
+
+- All path components, query parameters, and headers are preserved
+- Requests are forwarded to the configured origin by appending the incoming path
+
+Example:
+```
+Incoming request: www.enter.com/test?param=value
+Origin configured: www.origin.com
+Final destination: www.origin.com/test?param=value
+```
+
+## Routing Profiles
+
+Routing profiles allow you to customize how requests are transformed before forwarding.
+
+### Creating a Routing Profile
+
+#### Via Dashboard
+1. Navigate to Applications
+2. Select your application
+3. Click "Routing Profiles"
+4. Create a new profile
+
+#### Via API
+```http
+POST /api/v1/applications/{application_id}/routing-profiles
+Content-Type: application/json
+
+{
+  "name": "custom-profile",
+  "rules": [
+    {
+      "source_path": "/api/{version}/users",
+      "target_path": "/v{version}/users",
+      "methods": ["GET", "POST"]
+    }
+  ]
+}
+```
+
+## Path Variables
+
+You can define dynamic path segments using variables in curly braces `{variable_name}`.
+
+### Variable Usage
+
+- Variables are defined using the format: `{variable_name}`
+- Variables can be used in both source and target paths
+- Values are automatically extracted and replaced
+
+Examples:
+
+```
+Source path: /api/{version}/users/{user_id}
+Target path: /v{version}/users/{user_id}/details
+
+Incoming request: /api/v1/users/123
+Transformed to: /v1/users/123/details
+```
+
+### Supported Variable Locations
+
+Variables can be used in:
+- Path segments
+- Query parameters
+- Headers
+- Host names
+
+## Query String Handling
+
+### Default Behavior
+- Query parameters are preserved by default
+- Parameters order is maintained
+
+### Custom Query Transformation
+
+```http
+POST /api/v1/applications/{application_id}/routing-profiles
+Content-Type: application/json
+
+{
+  "name": "query-transform",
+  "rules": [
+    {
+      "source_path": "/search",
+      "target_path": "/api/search",
+      "query_params": {
+        "q": "search_term",
+        "page": "{page_number}"
+      }
+    }
+  ]
+}
+```
+
+## Header Transformation
+
+You can modify, add, or remove headers during routing:
+
+```http
+POST /api/v1/applications/{application_id}/routing-profiles
+Content-Type: application/json
+
+{
+  "name": "header-transform",
+  "rules": [
+    {
+      "source_path": "/api/secure",
+      "target_path": "/internal/api",
+      "headers": {
+        "add": {
+          "X-Internal-Token": "{api_token}"
+        },
+        "remove": ["Referer"]
+      }
+    }
+  ]
+}
+```
+
+## Advanced Routing Features
+
+### Method-Based Routing
+
+Define different rules based on HTTP methods:
+
+```json
+{
+  "rules": [
+    {
+      "source_path": "/resources/{id}",
+      "target_path": "/api/v1/resources/{id}",
+      "methods": ["GET", "HEAD"]
+    },
+    {
+      "source_path": "/resources/{id}",
+      "target_path": "/api/v2/resources/{id}",
+      "methods": ["POST", "PUT", "DELETE"]
+    }
+  ]
+}
+```
+
+### Host-Based Routing
+
+Route requests based on incoming host:
+
+```json
+{
+  "rules": [
+    {
+      "source_host": "{tenant}.enter.com",
+      "target_host": "{tenant}.origin.com",
+      "source_path": "/{path}",
+      "target_path": "/api/{tenant}/{path}"
+    }
+  ]
+}
+```
+
+## Rule Priority
+
+When multiple rules match a request:
+1. More specific paths take precedence
+2. Method-specific rules override generic rules
+3. Later rules in the configuration override earlier ones
+
+## Best Practices
+
+1. **Start Simple**: Begin with basic routing before adding complexity
+2. **Use Meaningful Variables**: Choose descriptive names for path variables
+3. **Document Transformations**: Keep track of your routing rules
+4. **Test Thoroughly**: Verify routing behavior with different request patterns
+5. **Monitor Changes**: Keep track of routing profile modifications
+
+## Examples
+
+### Basic Path Transformation
+```json
+{
+  "source_path": "/api/users",
+  "target_path": "/v1/users"
+}
+```
+
+### Variable Usage
+```json
+{
+  "source_path": "/api/{version}/products/{id}",
+  "target_path": "/internal/products/v{version}/{id}"
+}
+```
+
+### Query Parameter Transformation
+```json
+{
+  "source_path": "/search",
+  "target_path": "/api/search",
+  "query_params": {
+    "q": "search_term",
+    "limit": "{page_size}"
+  }
+}
+```
+
+## Limitations
+
+- Maximum of 50 rules per routing profile
+- Maximum of 10 variables per rule
+- Variable names must be alphanumeric
+- Path maximum length: 2048 characters
+
+## Need Help?
+
+For additional assistance or questions about routing configurations, please contact our support team or consult our API documentation for more detailed examples.
