@@ -43,7 +43,7 @@ Content-Type: application/json
   "rules": [
     {
       "source_path": "/api/{version}/users",
-      "target_path": "/v{version}/users",
+      "target_path": "/{version}/users",
       "methods": ["GET", "POST"]
     }
   ]
@@ -64,7 +64,7 @@ Examples:
 
 ```
 Source path: /api/{version}/users/{user_id}
-Target path: /v{version}/users/{user_id}/details
+Target path: /{version}/users/{user_id}/details
 
 Incoming request: /api/v1/users/123
 Transformed to: /v1/users/123/details
@@ -87,7 +87,7 @@ Variables can be used in:
 ### Custom Query Transformation
 
 ```http
-POST /api/v1/applications/{application_id}/routing-profiles
+POST /{account_id}/applications/{application_id}/routing-profiles
 Content-Type: application/json
 
 {
@@ -110,7 +110,7 @@ Content-Type: application/json
 You can modify, add, or remove headers during routing:
 
 ```http
-POST /api/v1/applications/{application_id}/routing-profiles
+POST /{account_id}/applications/{application_id}/routing-profiles
 Content-Type: application/json
 
 {
@@ -199,7 +199,7 @@ When multiple rules match a request:
 ```json
 {
   "source_path": "/api/{version}/products/{id}",
-  "target_path": "/internal/products/v{version}/{id}"
+  "target_path": "/internal/products/{version}/{id}"
 }
 ```
 
