@@ -240,6 +240,36 @@
 				}
 			}
 		},
+		"/{account_id}/jwk{jwk_id}": {
+			"get": {
+				"tags": ["JWK"],
+				"summary": "Get a JWK",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "JWKs retrieved successfully"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["JWK"],
+				"summary": "Delete a JWK",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "JWK deleted successfully"
+					}
+				}
+			}
+		},
 		"/{account_id}/jwk/create": {
 			"post": {
 				"tags": ["JWK"],
