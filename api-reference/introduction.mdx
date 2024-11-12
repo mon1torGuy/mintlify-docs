@@ -1,0 +1,40 @@
+---
+title: "API Introduction"
+description: "This guide will help you get started with integratingTypeAuthinto your application"
+---
+
+### Authentication
+
+To access theTypeAuthAPI endpoints, you must include a Bearer authorization token in the Authorization header of your HTTP requests. This token is used to authenticate and authorize your API calls.
+You can find your Bearer token by following these steps:
+
+Log in to yourTypeAuthaccount at https://app.typeauth.com.
+Navigate to the Account section.
+Locate the API Tokens tab.
+Copy the provided Bearer token.
+
+Here's an example of how to include the Bearer token in your API request:
+
+```http
+Authorization: Bearer YOUR_BEARER_TOKEN
+```
+
+Replace `YOUR_BEARER_TOKEN` with the actual token you obtained from yourTypeAuthaccount.
+
+### Request Format
+
+When making requests to theTypeAuthAPI, it is mandatory to include the `Content-Type` header with the value `application/json`. This header indicates that the request body is in JSON format.
+Here's an example of how to set the Content-Type header in your API request:
+
+```http
+Authorization: Bearer YOUR_BEARER_TOKEN
+Content-Type: application/json
+```
+
+Make sure to include this header in all your API requests to ensure proper communication with theTypeAuthAPI.
+
+<Note>
+  Please note that all API endpoints require Bearer authentication, except for
+  the authentication endpoint. The authentication endpoint is used
+  to validate the key/tokens and does not require prior authentication.
+</Note>
