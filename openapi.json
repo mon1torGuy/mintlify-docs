@@ -402,6 +402,48 @@
 				}
 			}
 		},
+		"/{account_id}/monitor/{monitor_id}": {
+			"get": {
+				"tags": ["Monitoring"],
+				"summary": "Get a monitor",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Monitor retrieved successfully"
+					},
+					"404": {
+						"description": "Monitor not found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Monitoring"],
+				"summary": "Delete a monitor",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Monitor created successfully"
+					},
+					"404": {
+						"description": "Monitor not found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
 		"/{account_id}/routing": {
 			"get": {
 				"tags": ["Routing"],
