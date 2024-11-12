@@ -36,7 +36,7 @@
 			"description": "Abuse prevention and rate limiting endpoints"
 		},
 		{
-			"name": "Monitoring",
+			"name": "Monitor",
 			"description": "Application monitoring endpoints"
 		},
 		{
@@ -378,7 +378,7 @@
 		},
 		"/{account_id}/monitor/create": {
 			"post": {
-				"tags": ["Monitoring"],
+				"tags": ["Monitor"],
 				"summary": "Create a new monitor",
 				"security": [
 					{
@@ -404,7 +404,7 @@
 		},
 		"/{account_id}/monitor/{monitor_id}": {
 			"get": {
-				"tags": ["Monitoring"],
+				"tags": ["Monitor"],
 				"summary": "Get a monitor",
 				"security": [
 					{
@@ -424,7 +424,7 @@
 				}
 			},
 			"delete": {
-				"tags": ["Monitoring"],
+				"tags": ["Monitor"],
 				"summary": "Delete a monitor",
 				"security": [
 					{
