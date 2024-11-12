@@ -49,7 +49,7 @@
 		}
 	],
 	"paths": {
-		"/applications/create": {
+		"/{account_id}/applications/create": {
 			"post": {
 				"tags": ["Applications"],
 				"summary": "Create a new application",
@@ -82,7 +82,7 @@
 				}
 			}
 		},
-		"/applications": {
+		"/{account_id}/applications": {
 			"get": {
 				"tags": ["Applications"],
 				"summary": "List all applications",
@@ -98,7 +98,7 @@
 				}
 			}
 		},
-		"/applications/{id}": {
+		"/{account_id}/applications/{id}": {
 			"get": {
 				"tags": ["Applications"],
 				"summary": "Get application details",
@@ -172,7 +172,7 @@
 				}
 			}
 		},
-		"/keys/create": {
+		"/{account_id}/keys/create": {
 			"post": {
 				"tags": ["Keys"],
 				"summary": "Create new API keys",
@@ -198,7 +198,7 @@
 				}
 			}
 		},
-		"/keys/{keyId}/verify": {
+		"/{account_id}/keys/{keyId}/verify": {
 			"get": {
 				"tags": ["Keys"],
 				"summary": "Verify a key",
@@ -224,7 +224,7 @@
 				}
 			}
 		},
-		"/jwk": {
+		"/{account_id}/jwk": {
 			"get": {
 				"tags": ["JWK"],
 				"summary": "List all JWKs",
@@ -240,7 +240,7 @@
 				}
 			}
 		},
-		"/jwk/create": {
+		"/{account_id}/jwk/create": {
 			"post": {
 				"tags": ["JWK"],
 				"summary": "Create a new JWK",
@@ -266,7 +266,7 @@
 				}
 			}
 		},
-		"/jwt": {
+		"/{account_id}/jwt": {
 			"get": {
 				"tags": ["JWT"],
 				"summary": "List all JWTs",
@@ -282,7 +282,7 @@
 				}
 			}
 		},
-		"/jwt/create": {
+		"/{account_id}/jwt/create": {
 			"post": {
 				"tags": ["JWT"],
 				"summary": "Create a new JWT",
@@ -308,7 +308,7 @@
 				}
 			}
 		},
-		"/security/geoblock/{id}": {
+		"/{account_id}/security/geoblock/{id}": {
 			"put": {
 				"tags": ["Security"],
 				"summary": "Update geoblocking settings",
@@ -334,7 +334,7 @@
 				}
 			}
 		},
-		"/abuse": {
+		"/{account_id}/abuse": {
 			"get": {
 				"tags": ["Abuse Prevention"],
 				"summary": "List all abuse prevention profiles",
@@ -350,7 +350,7 @@
 				}
 			}
 		},
-		"/abuse/create": {
+		"/{account_id}/abuse/create": {
 			"post": {
 				"tags": ["Abuse Prevention"],
 				"summary": "Create a new abuse prevention profile",
@@ -376,7 +376,7 @@
 				}
 			}
 		},
-		"/monitor/create": {
+		"/{account_id}/monitor/create": {
 			"post": {
 				"tags": ["Monitoring"],
 				"summary": "Create a new monitor",
@@ -402,7 +402,7 @@
 				}
 			}
 		},
-		"/routing": {
+		"/{account_id}/routing": {
 			"get": {
 				"tags": ["Routing"],
 				"summary": "List all routing profiles",
@@ -418,7 +418,7 @@
 				}
 			}
 		},
-		"/routing/create": {
+		"/{account_id}/routing/create": {
 			"post": {
 				"tags": ["Routing"],
 				"summary": "Create a new routing profile",
@@ -444,7 +444,7 @@
 				}
 			}
 		},
-		"/tags": {
+		"/{account_id}/tags": {
 			"get": {
 				"tags": ["Tags"],
 				"summary": "List all tags",
@@ -460,7 +460,7 @@
 				}
 			}
 		},
-		"/tags/{tag_id}": {
+		"/{account_id}/tag/{tag_id}": {
 			"delete": {
 				"tags": ["Tags"],
 				"summary": "Delete a tag",
@@ -476,7 +476,7 @@
 				}
 			}
 		},
-		"/tags/create": {
+		"/{account_id}/tag/create": {
 			"post": {
 				"tags": ["Tags"],
 				"summary": "Create a new tag",
