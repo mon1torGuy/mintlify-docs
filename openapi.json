@@ -460,6 +460,48 @@
 				}
 			}
 		},
+		"/{account_id}/routing{routing_id}": {
+			"delete": {
+				"tags": ["Routing"],
+				"summary": "Delete a routing profile",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Routing profile deleted successfully"
+					},
+					"404": {
+						"description": "Routing profile not found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			},
+			"get": {
+				"tags": ["Routing"],
+				"summary": "Get a routing profile",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Routing profile retrieved successfully"
+					},
+					"404": {
+						"description": "Routing profile not found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
 		"/{account_id}/routing/create": {
 			"post": {
 				"tags": ["Routing"],
