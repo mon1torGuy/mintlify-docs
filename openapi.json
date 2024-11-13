@@ -424,10 +424,10 @@
 			}
 		},
 
-		"/{account_id}/token/{application_id/{key_id}": {
+		"/{account_id}/token/{application_id}/{key_id}": {
 			"delete": {
 				"tags": ["Token"],
-				"summary": "Delete a key",
+				"summary": "Delete a token",
 				"security": [
 					{
 						"bearerAuth": []
