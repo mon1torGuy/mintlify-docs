@@ -558,6 +558,11 @@
 								"block_tor",
 								"disabled"
 							]
+						},
+						"example": {
+							"us": {
+								"value": "only_us"
+							}
 						}
 					}
 				],
