@@ -47,6 +47,7 @@
 				"token",
 				"jwt",
 				"monitors",
+				"tokens",
 				"routing",
 				"tags",
 				"security"
