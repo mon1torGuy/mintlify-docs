@@ -44,13 +44,13 @@
 			"group": "Functionality",
 			"pages": [
 				"application",
+				"authentication",
+				"security",
+				"routing",
 				"token",
 				"jwt",
 				"monitors",
-				"token",
-				"routing",
-				"tags",
-				"security"
+				"tags"
 			]
 		},
 
