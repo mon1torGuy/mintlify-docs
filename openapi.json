@@ -376,7 +376,7 @@
 				}
 			}
 		},
-		"/{account_id}/tokens/create/{application_id}": {
+		"/{account_id}/token/create/{application_id}": {
 			"post": {
 				"tags": ["Token"],
 				"summary": "Create a new Token",
@@ -424,7 +424,7 @@
 			}
 		},
 
-		"/{account_id}/tokens/{application_id/{key_id}": {
+		"/{account_id}/token/{application_id/{key_id}": {
 			"delete": {
 				"tags": ["Token"],
 				"summary": "Delete a key",
