@@ -515,16 +515,6 @@
 						"bearerAuth": []
 					}
 				],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/SecurityGeoblockingRequest"
-							}
-						}
-					}
-				},
 				"parameters": [
 					{
 						"name": "account_id",
@@ -1461,20 +1451,7 @@
 					}
 				}
 			},
-			"SecurityGeoblockingRequest": {
-				"type": "object",
-				"properties": {
-					"ip_address": {
-						"type": "string"
-					},
-					"country_code": {
-						"type": "string"
-					},
-					"country_name": {
-						"type": "string"
-					}
-				}
-			},
+
 			"SecurityResponse": {
 				"type": "object",
 				"properties": {
