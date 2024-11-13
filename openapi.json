@@ -520,7 +520,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UpdateGeoblockingRequest"
+								"$ref": "#/components/schemas/SecurityGeoblockingRequest"
 							}
 						}
 					}
@@ -1122,11 +1122,8 @@
 						"description": "Origin hostname of the application"
 					},
 					"auth_id": {
-						"type": "array",
-						"description": "Authentication of the application",
-						"items": {
-							"type": "string"
-						}
+						"type": "string",
+						"description": "Authentication of the application"
 					},
 
 					"detailResponse": {
@@ -1134,32 +1131,20 @@
 						"description": "Detail response of the application"
 					},
 					"jwt_id": {
-						"type": "array",
-						"description": "JWT of the application",
-						"items": {
-							"type": "string"
-						}
+						"type": "string",
+						"description": "JWT of the application"
 					},
 					"routing_id": {
-						"type": "array",
-						"description": "Routing of the application",
-						"items": {
-							"type": "string"
-						}
+						"type": "string",
+						"description": "Routing of the application"
 					},
 					"abuse_id": {
-						"type": "array",
-						"description": "Abuse prevention of the application",
-						"items": {
-							"type": "string"
-						}
+						"type": "string",
+						"description": "Abuse prevention of the application"
 					},
 					"llmcache_id": {
 						"type": "array",
-						"description": "Monitors of the application",
-						"items": {
-							"type": "string"
-						}
+						"description": "Monitors of the application"
 					}
 				},
 				"required": ["name", "domain", "originHostname", "auth_id"]
@@ -1356,6 +1341,30 @@
 					}
 				}
 			},
+			"CreateTokenRequest": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"path": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"method": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"token": {
+						"type": "string"
+					}
+				}
+			},
+
 			"CreateJWTRequest": {
 				"type": "object",
 				"properties": {
@@ -1419,6 +1428,20 @@
 					}
 				}
 			},
+			"SecurityGeoblockingRequest": {
+				"type": "object",
+				"properties": {
+					"ip_address": {
+						"type": "string"
+					},
+					"country_code": {
+						"type": "string"
+					},
+					"country_name": {
+						"type": "string"
+					}
+				}
+			},
 			"SecurityResponse": {
 				"type": "object",
 				"properties": {
@@ -1448,6 +1471,20 @@
 					"geoBlock": {
 						"type": "string",
 						"nullable": true
+					},
+					"isFirewall": {
+						"type": "boolean"
+					}
+				}
+			},
+			"CreateAbuseProfileRequest": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"geoBlock": {
+						"type": "string"
 					},
 					"isFirewall": {
 						"type": "boolean"
@@ -1519,6 +1556,26 @@
 					}
 				}
 			},
+			"CreateMonitorRequest": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					},
+					"_id": {
+						"type": "string"
+					},
+					"isActive": {
+						"type": "boolean"
+					}
+				}
+			},
 			"Monitor": {
 				"type": "object",
 				"properties": {
@@ -1562,6 +1619,59 @@
 					}
 				}
 			},
+			"CreateRoutingRequest": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"endpoints": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/RoutingEndpoints"
+						}
+					}
+				}
+			},
+			"RoutingEndpoints": {
+				"type": "object",
+
+				"properties": {
+					"public_method": {
+						"type": "string"
+					},
+					"public_path": {
+						"type": "string"
+					},
+					"public_headers": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"typeauth_response": {
+						"type": "string"
+					},
+					"typeauth_response_code": {
+						"type": "number"
+					},
+					"typeauth_response_body": {
+						"type": "string"
+					},
+					"typeauth_response_content_type": {
+						"type": "string"
+					},
+					"target_path": {
+						"type": "string"
+					},
+					"target_hostname": {
+						"type": "string"
+					},
+					"target_method": {
+						"type": "string"
+					}
+				}
+			},
 			"RoutingProfile": {
 				"type": "object",
 				"properties": {
@@ -1594,6 +1704,14 @@
 						"items": {
 							"$ref": "#/components/schemas/Tag"
 						}
+					}
+				}
+			},
+			"CreateTagRequest": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
 					}
 				}
 			},
