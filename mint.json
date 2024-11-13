@@ -47,7 +47,7 @@
 				"token",
 				"jwt",
 				"monitors",
-				"tokens",
+				"token",
 				"routing",
 				"tags",
 				"security"
@@ -58,52 +58,6 @@
 			"group": "API Documentation",
 
 			"pages": ["api-reference/introduction"]
-		},
-		{
-			"group": "Application",
-			"pages": [
-				"api-reference/applications/create-a-new-application",
-				"api-reference/applications/delete-an-application",
-				"api-reference/applications/list-all-applications",
-				"api-reference/applications/retrieve-an-application-by-id",
-				"api-reference/applications/update-an-application"
-			]
-		},
-		{
-			"group": "Keys / Tokens",
-			"pages": [
-				"api-reference/keys/create-a-key",
-				"api-reference/keys/list-all-keys",
-				"api-reference/keys/retrieve-keys-by-appid",
-				"api-reference/keys/update-a-key",
-				"api-reference/keys/update-a-keys-remaining-limit",
-				"api-reference/keys/delete-a-key",
-				"api-reference/keys/verify-authentication-key"
-			]
-		},
-		{
-			"group": "JSON Web Tokens",
-			"pages": [
-				"api-reference/jwts/create-jwt",
-				"api-reference/jwts/delete-jwt",
-				"api-reference/jwts/list-jwts"
-			]
-		},
-		{
-			"group": "Monitors",
-			"pages": [
-				"api-reference/monitors/create-a-monitor",
-				"api-reference/monitors/delete-monitor",
-				"api-reference/monitors/get-monitors",
-				"api-reference/monitors/update-monitor"
-			]
-		},
-		{
-			"group": "Feedback",
-			"pages": [
-				"api-reference/feedback/create-feedback",
-				"api-reference/feedback/get-feedback"
-			]
 		}
 	],
 	"feedback": {
