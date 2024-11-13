@@ -33,18 +33,27 @@ Routing profiles allow you to customize how requests are transformed before forw
 3. Click "Routing Profiles"
 4. Create a new profile
 
-#### Via API
+#### [Via API](https://docs.typeauth.com/api-reference/routing/create-a-new-routing-profile)
 ```http
-POST /api/v1/applications/{application_id}/routing-profiles
+POST /{account_id}/routing/{application_id}/routing-profiles
 Content-Type: application/json
 
 {
-  "name": "custom-profile",
-  "rules": [
+  "name": "<string>",
+  "endpoints": [
     {
-      "source_path": "/api/{version}/users",
-      "target_path": "/{version}/users",
-      "methods": ["GET", "POST"]
+      "public_method": "<string>",
+      "public_path": "<string>",
+      "public_headers": [
+        "<string>"
+      ],
+      "typeauth_response": "<string>",
+      "typeauth_response_code": 123,
+      "typeauth_response_body": "<string>",
+      "typeauth_response_content_type": "<string>",
+      "target_path": "<string>",
+      "target_hostname": "<string>",
+      "target_method": "<string>"
     }
   ]
 }
@@ -66,7 +75,7 @@ Examples:
 Source path: /api/{version}/users/{user_id}
 Target path: /{version}/users/{user_id}/details
 
-Incoming request: /api/v1/users/123
+Incoming request: /{account_id}/users/123
 Transformed to: /v1/users/123/details
 ```
 
@@ -84,51 +93,6 @@ Variables can be used in:
 - Query parameters are preserved by default
 - Parameters order is maintained
 
-### Custom Query Transformation
-
-```http
-POST /{account_id}/applications/{application_id}/routing-profiles
-Content-Type: application/json
-
-{
-  "name": "query-transform",
-  "rules": [
-    {
-      "source_path": "/search",
-      "target_path": "/api/search",
-      "query_params": {
-        "q": "search_term",
-        "page": "{page_number}"
-      }
-    }
-  ]
-}
-```
-
-## Header Transformation
-
-You can modify, add, or remove headers during routing:
-
-```http
-POST /{account_id}/applications/{application_id}/routing-profiles
-Content-Type: application/json
-
-{
-  "name": "header-transform",
-  "rules": [
-    {
-      "source_path": "/api/secure",
-      "target_path": "/internal/api",
-      "headers": {
-        "add": {
-          "X-Internal-Token": "{api_token}"
-        },
-        "remove": ["Referer"]
-      }
-    }
-  ]
-}
-```
 
 ## Advanced Routing Features
 
@@ -141,7 +105,7 @@ Define different rules based on HTTP methods:
   "rules": [
     {
       "source_path": "/resources/{id}",
-      "target_path": "/api/v1/resources/{id}",
+      "target_path": "/{account_id}/resources/{id}",
       "methods": ["GET", "HEAD"]
     },
     {
@@ -153,22 +117,6 @@ Define different rules based on HTTP methods:
 }
 ```
 
-### Host-Based Routing
-
-Route requests based on incoming host:
-
-```json
-{
-  "rules": [
-    {
-      "source_host": "{tenant}.enter.com",
-      "target_host": "{tenant}.origin.com",
-      "source_path": "/{path}",
-      "target_path": "/api/{tenant}/{path}"
-    }
-  ]
-}
-```
 
 ## Rule Priority
 
@@ -200,18 +148,6 @@ When multiple rules match a request:
 {
   "source_path": "/api/{version}/products/{id}",
   "target_path": "/internal/products/{version}/{id}"
-}
-```
-
-### Query Parameter Transformation
-```json
-{
-  "source_path": "/search",
-  "target_path": "/api/search",
-  "query_params": {
-    "q": "search_term",
-    "limit": "{page_size}"
-  }
 }
 ```
 
