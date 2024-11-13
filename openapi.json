@@ -12,12 +12,12 @@
 	],
 	"tags": [
 		{
-			"name": "Applications",
+			"name": "Application",
 			"description": "Application management endpoints"
 		},
 		{
-			"name": "Keys",
-			"description": "API key management endpoints"
+			"name": "Token",
+			"description": "Token endpoints"
 		},
 		{
 			"name": "JWT",
@@ -32,7 +32,7 @@
 			"description": "Security and firewall configuration endpoints"
 		},
 		{
-			"name": "Abuse Prevention",
+			"name": "Fraud and abuse prevention",
 			"description": "Abuse prevention and rate limiting endpoints"
 		},
 		{
@@ -44,7 +44,7 @@
 			"description": "Route configuration endpoints"
 		},
 		{
-			"name": "Tags",
+			"name": "Tag",
 			"description": "Tag management endpoints"
 		}
 	],
@@ -234,7 +234,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateKeyRequest"
+								"$ref": "#/components/schemas/CreateTokenRequest"
 							}
 						}
 					}
@@ -1095,6 +1095,75 @@
 	},
 	"components": {
 		"schemas": {
+			"CreateApplicationRequest": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "Name of the application"
+					},
+					"description": {
+						"type": "string",
+						"description": "Description of the application"
+					},
+					"tags": {
+						"type": "array",
+						"description": "Tags of the application",
+						"items": {
+							"type": "string"
+						}
+					},
+					"domain": {
+						"type": "string",
+						"description": "Domain of the application"
+					},
+					"originHostname": {
+						"type": "string",
+						"description": "Origin hostname of the application"
+					},
+					"auth_id": {
+						"type": "array",
+						"description": "Authentication of the application",
+						"items": {
+							"type": "string"
+						}
+					},
+
+					"detailResponse": {
+						"type": "boolean",
+						"description": "Detail response of the application"
+					},
+					"jwt_id": {
+						"type": "array",
+						"description": "JWT of the application",
+						"items": {
+							"type": "string"
+						}
+					},
+					"routing_id": {
+						"type": "array",
+						"description": "Routing of the application",
+						"items": {
+							"type": "string"
+						}
+					},
+					"abuse_id": {
+						"type": "array",
+						"description": "Abuse prevention of the application",
+						"items": {
+							"type": "string"
+						}
+					},
+					"llmcache_id": {
+						"type": "array",
+						"description": "Monitors of the application",
+						"items": {
+							"type": "string"
+						}
+					}
+				},
+				"required": ["name", "domain", "originHostname", "auth_id"]
+			},
 			"ApplicationResponse": {
 				"type": "object",
 				"properties": {
@@ -1222,6 +1291,28 @@
 					}
 				}
 			},
+			"CreateJWKRequest": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "Name of the JWK"
+					},
+					"type": {
+						"type": "string",
+						"description": "Type of the JWK uploaded or fetched"
+					},
+					"jwtEndpoint": {
+						"type": "string",
+						"description": "URL of the JWK"
+					},
+					"jsonKey": {
+						"type": "string",
+						"description": "JSON key of the JWK"
+					}
+				},
+				"required": ["name", "type"]
+			},
 			"JWK": {
 				"type": "object",
 				"properties": {
@@ -1264,6 +1355,40 @@
 						}
 					}
 				}
+			},
+			"CreateJWTRequest": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "Name of the JWT"
+					},
+					"path": {
+						"type": "array",
+						"description": "Path where the JWT is used"
+					},
+					"exp": {
+						"type": "boolean",
+						"description": "Expiration of the JWT"
+					},
+					"nbf": {
+						"type": "boolean",
+						"description": "Not before of the JWT"
+					},
+					"kid": {
+						"type": "boolean",
+						"description": "Key id of the JWT"
+					},
+					"jwk": {
+						"type": "string",
+						"description": "JWK ID of the JWT"
+					},
+					"keys": {
+						"type": "array",
+						"description": "JWT claims to be checked"
+					}
+				},
+				"required": ["name", "exp", "nbf", "kid", "jwk"]
 			},
 			"JWT": {
 				"type": "object",
