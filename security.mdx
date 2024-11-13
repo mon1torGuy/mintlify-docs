@@ -2,3 +2,207 @@
 title: "Security"
 description: "This guide will help you prevent abuse and fraud in your application"
 ---
+
+TypeAuth provides robust security features to protect your applications from various threats. Our security suite includes a Web Application Firewall (WAF) and Geoblocking capabilities, helping you maintain a strong security posture.
+
+## Web Application Firewall (WAF)
+
+TypeAuth's WAF provides protection against common web vulnerabilities and attacks through a comprehensive rule set.
+
+### Overview
+
+The WAF includes:
+- OWASP Core Rule Set integration
+- TypeAuth managed security rules
+- Real-time threat detection and blocking
+- Low false-positive rate
+
+### Key Protections
+
+Our WAF protects against:
+- SQL Injection attacks
+- Cross-Site Scripting (XSS)
+- Remote Code Execution
+- Local File Inclusion
+- Remote File Inclusion
+- HTTP Protocol Violations
+- Common Web Attacks
+
+### Configuration
+
+#### Via Dashboard
+1. Navigate to Security
+2. Select "Application Security"
+3. Toggle WAF status (Enable/Disable)
+
+#### [Via API](https://docs.typeauth.com/api-reference/security)
+```http
+PATCH /{account_id}/security/waf/{application_id}?status=enable
+```
+
+### OWASP Rules
+
+TypeAuth implements the OWASP Core Rule Set, which provides:
+- Protocol violation checks
+- Request limits
+- HTTP policy enforcement
+- Bad robots detection
+- Security scanner detection
+
+## Geoblocking
+
+Control access to your applications based on geographic regions.
+
+### Available Regions
+
+TypeAuth offers predefined region configurations:
+- 🌎 US (United States)
+- 🇪🇺 EU (European Union)
+- 🇮🇳 IN (India)
+- 🌐 US and EU combined
+- 🦘 AU (Australia)
+- 🇩🇪 GE (Germany)
+
+### Configuration
+
+#### Via Dashboard
+1. Navigate to Application Settings
+2. Select "Geoblocking"
+3. Choose allowed regions
+4. Save configuration
+
+#### [Via API](https://docs.typeauth.com/api-reference/security)
+```http
+PATCH /{account_id}/security/geoblock/{application_id}?area=US
+
+```
+
+### Behavior
+
+- Only traffic from selected regions will be allowed
+- All other traffic will be blocked with a 403 Forbidden response
+- IP geolocation is performed at the edge for minimal latency
+
+## Security Best Practices
+
+### 1. WAF Implementation
+
+✅ **Always Keep WAF Enabled**
+- The WAF is your first line of defense
+- Protects against known vulnerabilities
+- Regular updates with new security rules
+
+❌ **Risks of Disabled WAF**
+- Exposure to common attack vectors
+- Increased vulnerability to zero-day exploits
+- No protection against automated attacks
+
+### 2. Geoblocking Strategy
+
+Consider these factors when configuring geoblocking:
+- Your user base location
+- Compliance requirements
+- Business operations regions
+- Known threat origins
+
+### 3. Monitoring and Alerts
+
+Monitor security events through:
+- TypeAuth Dashboard
+- Security logs
+- Real-time alerts
+- Traffic analytics
+
+## Implementation Guide
+
+### 1. Basic Security Setup
+
+```http
+POST /api/v1/applications/{application_id}/security/basic
+Content-Type: application/json
+
+{
+  "waf_enabled": true,
+  "geoblocking": {
+    "enabled": true,
+    "allowed_regions": ["US", "EU"]
+  }
+}
+```
+
+### 2. Advanced Configuration
+
+```http
+POST /api/v1/applications/{application_id}/security/advanced
+Content-Type: application/json
+
+{
+  "waf": {
+    "enabled": true,
+    "sensitivity": "high",
+    "custom_rules_enabled": true
+  },
+  "geoblocking": {
+    "enabled": true,
+    "allowed_regions": ["US", "EU"],
+    "block_anonymous_proxy": true
+  }
+}
+```
+
+## Monitoring and Logs
+
+### Security Events
+- Real-time security incident logging
+- Detailed attack information
+- Geographic origin of threats
+- Attack type classification
+
+### Access Logs
+- Blocked request details
+- Geolocation information
+- WAF rule triggers
+- Request metadata
+
+## Response Codes
+
+| Code | Description | Cause |
+|------|-------------|-------|
+| 403  | Forbidden | Geoblocking or WAF rule triggered |
+| 400  | Bad Request | Invalid request format |
+| 429  | Too Many Requests | Rate limit exceeded |
+
+## Recommendations
+
+1. **Always-On Security**
+   - Keep WAF enabled
+   - Configure appropriate geoblocking
+   - Monitor security events
+
+2. **Regular Reviews**
+   - Check security logs
+   - Review blocked traffic
+   - Update regional restrictions
+
+3. **Incident Response**
+   - Monitor security alerts
+   - Document security events
+   - Update security policies
+
+## Limitations
+
+- Maximum of 10 custom WAF rules per application
+- Geoblocking limited to predefined regions
+- WAF rule updates may take up to 5 minutes to propagate
+
+## Future Security Features
+
+We are continuously working to enhance our security features. Upcoming additions will include:
+- Custom WAF rules
+- Rate limiting
+- DDoS protection
+- Advanced threat analytics
+
+## Need Help?
+
+For security-related questions or assistance, please contact our security team or refer to our detailed security documentation.
