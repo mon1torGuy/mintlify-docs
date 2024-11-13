@@ -549,9 +549,38 @@
 								"disabled"
 							]
 						},
-						"example": {
+						"examples": {
 							"us": {
-								"value": "only_us"
+								"value": "only_us",
+								"summary": "Allow only US traffic"
+							},
+							"eu": {
+								"value": "only_eu",
+								"summary": "Allow only EU traffic"
+							},
+							"ge": {
+								"value": "only_ge",
+								"summary": "Allow only GE traffic"
+							},
+							"au": {
+								"value": "only_au",
+								"summary": "Allow only AU traffic"
+							},
+							"in": {
+								"value": "only_in",
+								"summary": "Allow only IN traffic"
+							},
+							"useu": {
+								"value": "only_useu",
+								"summary": "Allow only US and EU traffic"
+							},
+							"Tor": {
+								"value": "block_tor",
+								"summary": "Block Tor traffic"
+							},
+							"disabled": {
+								"value": "disabled",
+								"summary": "Disable geoblocking"
 							}
 						}
 					}
