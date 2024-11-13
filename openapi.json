@@ -23,6 +23,7 @@
 			"name": "JWT",
 			"description": "JWT configuration endpoints"
 		},
+		{ "name": "Authentication", "description": "Authentication endpoints" },
 		{
 			"name": "JWK",
 			"description": "JWK (JSON Web Key) management endpoints"
@@ -208,6 +209,169 @@
 				"responses": {
 					"200": {
 						"description": "Application deleted successfully"
+					}
+				}
+			}
+		},
+		"/{account_id}/authentication/create": {
+			"post": {
+				"tags": ["Authentication"],
+				"summary": "Create a new authentication profile",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateAuthenticationRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Authentication profile created successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApplicationResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/{account_id}/authentication": {
+			"get": {
+				"tags": ["Authentication"],
+				"summary": "List all authentication profiles",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Applications retrieved successfully"
+					}
+				}
+			}
+		},
+		"/{account_id}/authentication/{authentication_id}": {
+			"get": {
+				"tags": ["Authentication"],
+				"summary": "Get authentication details",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "application_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "authentication profile details retrieved successfully"
+					}
+				}
+			},
+			"patch": {
+				"tags": ["Authentication"],
+				"summary": "Update authentication",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "application_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "authentication updated successfully"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Authentication"],
+				"summary": "Delete authentication",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "application_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "authentication deleted successfully"
 					}
 				}
 			}
@@ -1160,6 +1324,70 @@
 	},
 	"components": {
 		"schemas": {
+			"CreateAuthenticationRequest": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "Name of the authentication profile"
+					},
+					"ratelimit": {
+						"type": "object",
+						"properties": {
+							"limit": {
+								"type": "integer"
+							},
+							"timeWindow": {
+								"type": "integer"
+							}
+						},
+						"nullable": true
+					},
+					"refill": {
+						"type": "object",
+						"properties": {
+							"amount": {
+								"type": "integer"
+							},
+							"interval": {
+								"type": "string",
+								"enum": ["dalily", "wekkly", "monhtly"]
+							}
+						},
+						"nullable": true
+					},
+					"remaining": {
+						"type": "integer",
+						"nullable": true
+					},
+					"keyType": {
+						"type": "string",
+						"enum": ["jwt", "token"]
+					},
+					"jwt_id": {
+						"type": "string",
+						"nullable": true
+					},
+					"expires": {
+						"type": "integer",
+						"nullable": true
+					},
+					"byteLength": {
+						"type": "integer",
+						"nullable": true
+					},
+
+					"tags": {
+						"type": "array",
+						"maxItems": 5,
+						"uniqueItems": true,
+						"description": "Tags of the application",
+						"items": {
+							"type": "string"
+						}
+					}
+				}
+			},
 			"CreateApplicationRequest": {
 				"type": "object",
 				"properties": {

@@ -2,3 +2,127 @@
 title: "Monitor"
 description: "This guide will help you prevent abuse and fraud in your application"
 ---
+
+TypeAuth automatically monitors your API endpoints to ensure high availability and reliability. Every application configured in TypeAuth includes HTTP monitoring that continuously checks your origin API's health status.
+
+## Overview
+
+When you configure an application, TypeAuth automatically:
+- Creates a health check monitor
+- Performs regular HTTP requests
+- Expects 200 OK responses
+- Alerts on failures
+
+## Health Check Configuration
+
+### Default Settings
+
+Every application comes with a basic health check:
+```json
+{
+  "enabled": true,
+  "url": "/",
+  "method": "GET",
+  "status_code": 200
+}
+```
+
+## Monitoring Features
+
+### Health Checks
+- Regular HTTP requests to your API
+- Custom endpoints support
+- Header customization
+- Response validation
+
+
+## Dashboard View
+
+Monitor your API health through the TypeAuth dashboard:
+- Real-time status
+- Historical uptime
+- Response time graphs
+- Alert history
+- Incident timelines
+
+## API Endpoints
+
+### Get Monitor Status
+```http
+GET /api/v1/applications/{application_id}/monitor/status
+```
+
+### Update Monitor Configuration
+```http
+PUT /api/v1/applications/{application_id}/monitor
+{
+  "endpoint": "/healthz",
+  "interval": 45,
+  "timeout": 4
+}
+```
+
+### Get Historical Data
+```http
+GET /api/v1/applications/{application_id}/monitor/history
+{
+  "start_date": "2024-03-14T00:00:00Z",
+  "end_date": "2024-03-15T00:00:00Z"
+}
+```
+
+## Best Practices
+
+1. **Health Check Endpoints**
+   - Create dedicated health check endpoint
+   - Keep health checks lightweight
+   - Include critical dependency checks
+   - Return appropriate status codes
+
+2. **Monitoring Configuration**
+   - Set appropriate check intervals
+   - Configure reasonable timeouts
+   - Add relevant custom headers
+   - Document expected responses
+
+3. **Alert Management**
+   - Configure relevant notification channels
+   - Set appropriate thresholds
+   - Document incident response procedures
+   - Regular alert review
+
+
+
+## Metrics Available
+
+- **Uptime Percentage**
+- **Response Times**
+  - Average
+  - Maximum
+  - Minimum
+  - Percentiles (p95, p99)
+- **Status Codes**
+- **SSL Certificate Validity**
+- **DNS Resolution Time**
+
+## Limitations
+
+- Minimum check interval: 30 seconds
+- Maximum check interval: 300 seconds
+- Maximum custom headers: 10
+- Historical data retention: 30 days
+- Maximum endpoints per application: 5
+
+## Status Codes
+
+| Status | Description |
+|--------|-------------|
+| HEALTHY | All checks passing |
+| DEGRADED | Some checks failing |
+| DOWN | All checks failing |
+| MAINTENANCE | Monitoring paused |
+
+
+## Need Help?
+
+For assistance with monitoring configuration or troubleshooting, please contact our support team or refer to our API documentation for detailed examples.
