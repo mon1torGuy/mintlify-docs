@@ -212,10 +212,10 @@
 				}
 			}
 		},
-		"/{account_id}/keys/create": {
+		"/{account_id}/keys/create/{application_id}": {
 			"post": {
 				"tags": ["Keys"],
-				"summary": "Create new API keys",
+				"summary": "Create new Tokens",
 				"security": [
 					{
 						"bearerAuth": []
@@ -224,6 +224,12 @@
 				"parameters": [
 					{
 						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "application_id",
 						"in": "path",
 						"required": true,
 						"schema": { "type": "string" }
@@ -1194,7 +1200,7 @@
 						"description": "Fraud and abuse prevention  ID of the application"
 					},
 					"llmcache_id": {
-						"type": "array",
+						"type": "string",
 						"description": "LLM Cache ID of the application"
 					}
 				},
@@ -1413,23 +1419,18 @@
 			"CreateTokenRequest": {
 				"type": "object",
 				"properties": {
-					"name": {
-						"type": "string"
+					"amount": {
+						"type": "integer",
+						"maximum": 100
 					},
-					"path": {
+					"tags": {
 						"type": "array",
+						"maxItems": 5,
+						"uniqueItems": true,
+						"description": "Tags of the application",
 						"items": {
 							"type": "string"
 						}
-					},
-					"method": {
-						"type": "array",
-						"items": {
-							"type": "string"
-						}
-					},
-					"token": {
-						"type": "string"
 					}
 				}
 			},
