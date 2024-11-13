@@ -527,7 +527,7 @@
 				},
 				"parameters": [
 					{
-						"name": "application_id",
+						"name": "account_id",
 						"in": "path",
 						"required": true,
 						"schema": {
