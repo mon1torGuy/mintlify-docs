@@ -58,6 +58,16 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -91,6 +101,16 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Applications retrieved successfully"
@@ -98,7 +118,7 @@
 				}
 			}
 		},
-		"/{account_id}/applications/{id}": {
+		"/{account_id}/applications/{application_id}": {
 			"get": {
 				"tags": ["Applications"],
 				"summary": "Get application details",
@@ -109,7 +129,15 @@
 				],
 				"parameters": [
 					{
-						"name": "id",
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "application_id",
 						"in": "path",
 						"required": true,
 						"schema": {
@@ -133,7 +161,13 @@
 				],
 				"parameters": [
 					{
-						"name": "id",
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "application_id",
 						"in": "path",
 						"required": true,
 						"schema": {
@@ -157,7 +191,13 @@
 				],
 				"parameters": [
 					{
-						"name": "id",
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "application_id",
 						"in": "path",
 						"required": true,
 						"schema": {
@@ -181,6 +221,14 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -198,7 +246,7 @@
 				}
 			}
 		},
-		"/{account_id}/keys/{keyId}/verify": {
+		"/{account_id}/keys/{key_id}/verify": {
 			"get": {
 				"tags": ["Keys"],
 				"summary": "Verify a key",
@@ -209,7 +257,15 @@
 				],
 				"parameters": [
 					{
-						"name": "keyId",
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "key_id",
 						"in": "path",
 						"required": true,
 						"schema": {
@@ -233,6 +289,14 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "JWKs retrieved successfully"
@@ -247,6 +311,24 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "jwk_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
 					}
 				],
 				"responses": {
@@ -279,6 +361,14 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -305,6 +395,14 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "JWTs retrieved successfully"
@@ -321,6 +419,22 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "jwt_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "JWTs retrieved successfully"
@@ -333,6 +447,22 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "jwt_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
 					}
 				],
 				"responses": {
@@ -349,6 +479,14 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
 					}
 				],
 				"requestBody": {
@@ -368,8 +506,8 @@
 				}
 			}
 		},
-		"/{account_id}/security/geoblock/{id}": {
-			"put": {
+		"/{account_id}/security/geoblock/{application_id}": {
+			"patch": {
 				"tags": ["Security"],
 				"summary": "Update geoblocking settings",
 				"security": [
@@ -377,9 +515,27 @@
 						"bearerAuth": []
 					}
 				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateGeoblockingRequest"
+							}
+						}
+					}
+				},
 				"parameters": [
 					{
-						"name": "id",
+						"name": "application_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "application_id",
 						"in": "path",
 						"required": true,
 						"schema": {
@@ -390,6 +546,84 @@
 				"responses": {
 					"200": {
 						"description": "Geoblocking settings updated successfully"
+					},
+					"400": {
+						"description": "Missing parameters"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/{account_id}/security/waf/{application_id}": {
+			"patch": {
+				"tags": ["Security"],
+				"summary": "Update Web application firewall settings",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "application_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Geoblocking settings updated successfully"
+					},
+					"400": {
+						"description": "Missing parameters"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/{account_id}/security": {
+			"get": {
+				"tags": ["Security"],
+				"summary": "Get security settings",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Geoblocking settings updated successfully"
+					},
+					"400": {
+						"description": "Missing parameters"
+					},
+					"500": {
+						"description": "Internal Server Error"
 					}
 				}
 			}
@@ -401,6 +635,14 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
 					}
 				],
 				"responses": {
@@ -419,6 +661,22 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "abuse_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Abuse prevention profiles retrieved successfully"
@@ -431,6 +689,22 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "abuse_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
 					}
 				],
 				"responses": {
@@ -447,6 +721,14 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
 					}
 				],
 				"requestBody": {
@@ -475,6 +757,14 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -501,6 +791,14 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Monitors retrieved successfully"
@@ -523,6 +821,22 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "monitor_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Monitor retrieved successfully"
@@ -541,6 +855,22 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "monitor_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
 					}
 				],
 				"responses": {
@@ -565,6 +895,14 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Routing profiles retrieved successfully"
@@ -579,6 +917,22 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "routing_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
 					}
 				],
 				"responses": {
@@ -601,6 +955,22 @@
 						"bearerAuth": []
 					}
 				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
+					},
+					{
+						"name": "routing_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Routing profile retrieved successfully"
@@ -621,6 +991,14 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
 					}
 				],
 				"requestBody": {
@@ -647,6 +1025,14 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
 					}
 				],
 				"responses": {
@@ -679,6 +1065,14 @@
 				"security": [
 					{
 						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "account_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string" }
 					}
 				],
 				"requestBody": {
