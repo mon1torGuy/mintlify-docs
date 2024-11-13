@@ -1508,8 +1508,7 @@
 						"type": "boolean"
 					},
 					"geoBlock": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"isFirewall": {
 						"type": "boolean"
@@ -1522,11 +1521,23 @@
 					"name": {
 						"type": "string"
 					},
-					"geoBlock": {
+					"blocklist": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"exceptions": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"rlRequests": {
 						"type": "string"
 					},
-					"isFirewall": {
-						"type": "boolean"
+					"rlInterval": {
+						"type": "string"
 					}
 				}
 			},
