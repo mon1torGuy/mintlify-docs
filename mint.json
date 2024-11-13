@@ -49,8 +49,8 @@
 				"routing",
 				"token",
 				"jwt",
-				"monitors",
-				"tags"
+				"monitor",
+				"tag"
 			]
 		},
 
