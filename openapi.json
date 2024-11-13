@@ -533,7 +533,7 @@
 						}
 					},
 					{
-						"name": "status",
+						"name": "area",
 						"in": "query",
 						"required": true,
 						"schema": {
@@ -602,7 +602,7 @@
 						"required": true,
 						"schema": {
 							"type": "string",
-							"enum": ["disable", "enalbe"]
+							"enum": ["disable", "enable"]
 						}
 					}
 				],
