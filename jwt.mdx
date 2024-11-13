@@ -2,3 +2,175 @@
 title: "JSON web Token"
 description: "This guide will help you prevent abuse and fraud in your application"
 ---
+
+TypeAuth provides comprehensive JWT (JSON Web Token) validation capabilities. While TypeAuth doesn't generate JWTs, it can validate tokens issued by your authentication systems, ensuring they meet your security requirements before allowing API access.
+
+## Overview
+
+JWT validation in TypeAuth verifies:
+- Token signature authenticity
+- Expiration status
+- Time validity
+- Custom claim requirements
+
+## Validation Process
+
+### Standard Checks
+
+TypeAuth automatically validates:
+
+1. **Signature Verification**
+   - RS256, RS384, RS512
+   - HS256, HS384, HS512
+   - ES256, ES384, ES512
+
+2. **Time-Based Claims**
+   ```json
+   {
+     "exp": 1735689600,  // Expiration time
+     "nbf": 1704067200,  // Not valid before
+     "iat": 1704067200   // Issued at
+   }
+   ```
+
+### Custom Claim Validation
+
+Define specific claims that must be present and match expected values:
+
+```http
+POST /api/v1/applications/{application_id}/jwt/validation
+Content-Type: application/json
+
+{
+  "required_claims": {
+    "iss": "https://auth.yourcompany.com",
+    "aud": "api.yourcompany.com",
+    "role": ["admin", "user"],
+    "tenant_id": "{dynamic}"
+  }
+}
+```
+
+## Configuration
+
+### Basic Setup
+
+```http
+POST {account_id}/jwt/create
+Content-Type: application/json
+
+{
+  "name": "<string>",
+  "path": [
+    "<any>"
+  ],
+  "exp": true,
+  "nbf": true,
+  "kid": true,
+  "jwk": "<string>",
+  "keys": [
+    "<any>"
+  ]
+}
+```
+
+### Advanced Validation Rules
+
+```json
+{
+  "validation_rules": {
+    "verify_exp": true,
+    "verify_nbf": true,
+    "verify_iat": true,
+    "clock_skew": 300,
+    "required_claims": {
+      "iss": ["https://auth.company.com"],
+      "aud": ["api.company.com"],
+      "scope": ["read:users", "write:users"]
+    },
+    "optional_claims": {
+      "tenant_id": "*",
+      "environment": ["prod", "staging"]
+    }
+  }
+}
+```
+
+
+
+## Common Validation Scenarios
+
+### 1. Basic Time Validation
+```json
+{
+  "validation_rules": {
+    "verify_exp": true,
+    "verify_nbf": true,
+    "clock_skew": 300
+  }
+}
+```
+
+### 2. Role-Based Access
+```json
+{
+  "validation_rules": {
+    "required_claims": {
+      "role": ["admin", "editor", "viewer"]
+    }
+  }
+}
+```
+
+### 3. Multi-Tenant Validation
+```json
+{
+  "validation_rules": {
+    "required_claims": {
+      "tenant_id": "{dynamic}",
+      "permissions": ["read", "write"]
+    }
+  }
+}
+```
+
+## Error Handling
+
+| Error Code | Description | Solution |
+|------------|-------------|----------|
+| `invalid_signature` | Token signature verification failed | Check signing key/algorithm |
+| `token_expired` | Token has expired | Refresh token |
+| `token_not_active` | Token not yet valid (NBF) | Check clock sync |
+| `missing_claim` | Required claim not present | Add required claim |
+| `invalid_claim` | Claim value doesn't match requirements | Correct claim value |
+
+## Best Practices
+
+1. **Signature Verification**
+   - Use strong algorithms (RS256 minimum)
+   - Regularly rotate signing keys
+   - Maintain secure key storage
+
+2. **Claim Validation**
+   - Always verify issuer (`iss`)
+   - Validate audience (`aud`)
+   - Include expiration (`exp`)
+   - Check not-before (`nbf`)
+
+3. **Security Considerations**
+   - Set appropriate clock skew
+   - Validate all critical claims
+   - Use specific audience values
+   - Implement key rotation
+
+## Limitations
+
+- Maximum 10 public keys per application
+- Maximum 20 required claims
+- Maximum 20 optional claims
+- Clock skew: 0-900 seconds
+- Supported key types: RSA, ECDSA, HMAC
+
+## Need Help?
+
+For assistance with JWT validation configuration or troubleshooting, please contact our support team or refer to our API documentation for detailed examples.

@@ -2,3 +2,93 @@
 title: "Tokens"
 description: "This guide will help you prevent abuse and fraud in your application"
 ---
+
+TypeAuth provides secure opaque tokens for API authentication. These tokens serve as access credentials for your users and customers, inheriting all security configurations from their associated authentication profiles.
+
+## Token Characteristics
+
+- **Length**: Configurable from 32 to 128 characters
+- **Format**: Opaque, cryptographically secure strings
+- **Prefix**: Customizable prefix for easy identification (Up to 6 characters)
+- **Tags**: Up to 3 tags per token for organization and tracking
+
+### Token Format Example
+```
+ta_prod_a1b2c3d4e5f6...
+```
+
+## Creating Tokens
+
+Tokens can be generated individually or in bulk through both the dashboard and API.
+
+### Via Dashboard
+1. Navigate to Application section
+2. Click "Create New Token"
+3. Select the amount of tokens to generate
+    -   Up to 12 through the dashboard
+    -   Up to 100 over the API
+4. Apply tags (optional)
+5. Generate tokens
+
+### [Via API](https://docs.typeauth.com/api-reference/keys/create-new-tokens)
+
+#### Single Token Creation
+```http
+POST {account_id}/keys/create/{application_id}
+Content-Type: application/json
+
+{
+  "amount": 64,
+  "tags": [
+    "customer",
+    "environment"
+  ]
+}
+```
+
+
+
+## Token Properties
+
+Tokens inherit properties from their associated authentication profile:
+
+### Inherited Settings
+- Rate limits
+- Token expiration
+- Rate limit refill periods
+- Usage quotas
+- Access restrictions
+
+## Security Best Practices
+
+1. **Token Length**
+   - Use minimum 64 characters for production
+   - Longer tokens for higher security requirements
+
+2. **Token Distribution**
+   - Secure transmission to end users
+   - One token per client/use-case
+   - Regular token rotation
+
+3. **Monitoring**
+   - Track token usage patterns
+   - Monitor for suspicious activity
+   - Regular audit of active tokens
+
+4. **Tag Management**
+   - Use consistent tagging schemes
+   - Include purpose and environment tags
+   - Regular tag cleanup
+
+
+
+## Limitations
+
+- Maximum 3 tags per token
+- Token length: 32-128 characters
+- Maximum 100 tokens per bulk creation
+- Tag value maximum length: 100 characters
+
+## Need Help?
+
+For assistance with token management or configuration, please contact our support team or refer to our API documentation for detailed examples.
