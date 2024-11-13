@@ -1160,6 +1160,8 @@
 					},
 					"tags": {
 						"type": "array",
+						"maxItems": 5,
+						"uniqueItems": true,
 						"description": "Tags of the application",
 						"items": {
 							"type": "string"
@@ -1175,28 +1177,25 @@
 					},
 					"auth_id": {
 						"type": "string",
-						"description": "Authentication of the application"
+						"description": "Authentication ID of the application"
 					},
 
 					"detailResponse": {
 						"type": "boolean",
 						"description": "Detail response of the application"
 					},
-					"jwt_id": {
-						"type": "string",
-						"description": "JWT of the application"
-					},
+
 					"routing_id": {
 						"type": "string",
-						"description": "Routing of the application"
+						"description": "Routing ID of the application"
 					},
 					"abuse_id": {
 						"type": "string",
-						"description": "Abuse prevention of the application"
+						"description": "Fraud and abuse prevention  ID of the application"
 					},
 					"llmcache_id": {
 						"type": "array",
-						"description": "Monitors of the application"
+						"description": "LLM Cache ID of the application"
 					}
 				},
 				"required": ["name", "domain", "originHostname", "auth_id"]
@@ -1295,7 +1294,8 @@
 					},
 					"expires": {
 						"type": "integer",
-						"nullable": true
+						"nullable": true,
+						"format": "epoch time"
 					},
 					"remaining": {
 						"type": "integer",
@@ -1303,10 +1303,27 @@
 					},
 					"ratelimit": {
 						"type": "object",
+						"properties": {
+							"limit": {
+								"type": "integer"
+							},
+							"timeWindow": {
+								"type": "integer"
+							}
+						},
 						"nullable": true
 					},
 					"refill": {
 						"type": "object",
+						"properties": {
+							"amount": {
+								"type": "integer"
+							},
+							"interval": {
+								"type": "string",
+								"enum": ["dalily", "wekkly", "monhtly"]
+							}
+						},
 						"nullable": true
 					}
 				}
