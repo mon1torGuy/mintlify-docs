@@ -541,8 +541,17 @@
 						"schema": {
 							"type": "string"
 						}
+					},
+					{
+						"name": "area",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
 					}
 				],
+
 				"responses": {
 					"200": {
 						"description": "Geoblocking settings updated successfully"
@@ -577,6 +586,14 @@
 					{
 						"name": "application_id",
 						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "status",
+						"in": "query",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -631,7 +648,7 @@
 		"/{account_id}/abuse": {
 			"get": {
 				"tags": ["Abuse Prevention"],
-				"summary": "List all abuse prevention profiles",
+				"summary": "List all Fraud and Abuse prevention profiles",
 				"security": [
 					{
 						"bearerAuth": []
@@ -717,7 +734,7 @@
 		"/{account_id}/abuse/create": {
 			"post": {
 				"tags": ["Abuse Prevention"],
-				"summary": "Create a new abuse prevention profile",
+				"summary": "Create a new fraud and abuse prevention profile",
 				"security": [
 					{
 						"bearerAuth": []
