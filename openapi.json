@@ -247,7 +247,14 @@
 				},
 				"responses": {
 					"201": {
-						"description": "Keys created successfully"
+						"description": "Application created successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApplicationResponse"
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1431,6 +1438,76 @@
 						"items": {
 							"type": "string"
 						}
+					}
+				}
+			},
+			"CreateTokenResponse": {
+				"type": "object",
+
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"app_id": {
+						"type": "string"
+					},
+					"account_id": {
+						"type": "string"
+					},
+					"value": {
+						"type": "string"
+					},
+					"byteLength": {
+						"type": "number"
+					},
+					"enabled": {
+						"type": "boolean"
+					},
+					"expires": {
+						"type": "integer",
+						"nullable": true,
+						"format": "epoch time"
+					},
+					"metadata": {
+						"type": "string",
+						"nullable": true
+					},
+					"ratelimit": {
+						"type": "object",
+						"properties": {
+							"limit": {
+								"type": "integer"
+							},
+							"timeWindow": {
+								"type": "integer"
+							}
+						},
+						"nullable": true
+					},
+					"refill": {
+						"type": "object",
+						"properties": {
+							"amount": {
+								"type": "integer"
+							},
+							"interval": {
+								"type": "string",
+								"enum": ["dalily", "wekkly", "monhtly"]
+							}
+						},
+						"nullable": true
+					},
+					"remaining": {
+						"type": "integer",
+						"nullable": true
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
 					}
 				}
 			},
