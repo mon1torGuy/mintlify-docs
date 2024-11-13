@@ -543,11 +543,21 @@
 						}
 					},
 					{
-						"name": "area",
+						"name": "status",
 						"in": "query",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "string",
+							"enum": [
+								"only_us",
+								"only_eu",
+								"only_ge",
+								"only_au",
+								"only_in",
+								"only_useu",
+								"block_tor",
+								"disabled"
+							]
 						}
 					}
 				],
@@ -596,7 +606,8 @@
 						"in": "query",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "string",
+							"enum": ["disable", "enalbe"]
 						}
 					}
 				],
