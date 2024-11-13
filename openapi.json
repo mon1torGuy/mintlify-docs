@@ -376,10 +376,10 @@
 				}
 			}
 		},
-		"/{account_id}/keys/create/{application_id}": {
+		"/{account_id}/tokens/create/{application_id}": {
 			"post": {
-				"tags": ["Keys"],
-				"summary": "Create new Tokens",
+				"tags": ["Token"],
+				"summary": "Create a new Token",
 				"security": [
 					{
 						"bearerAuth": []
@@ -423,10 +423,11 @@
 				}
 			}
 		},
-		"/{account_id}/keys/{key_id}/verify": {
-			"get": {
-				"tags": ["Keys"],
-				"summary": "Verify a key",
+
+		"/{account_id}/tokens/{application_id/{key_id}": {
+			"delete": {
+				"tags": ["Token"],
+				"summary": "Delete a key",
 				"security": [
 					{
 						"bearerAuth": []
@@ -448,11 +449,19 @@
 						"schema": {
 							"type": "string"
 						}
+					},
+					{
+						"name": "application_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "Key verified successfully"
+						"description": "Key deleted successfully"
 					}
 				}
 			}
