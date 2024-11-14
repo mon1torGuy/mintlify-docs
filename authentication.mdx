@@ -2,3 +2,133 @@
 title: "Authentication"
 description: "This guide will help you prevent abuse and fraud in your application"
 ---
+
+
+Authentication profiles in TypeAuth define security and rate limiting settings that are applied to applications and their associated tokens.
+
+## Configuration Properties
+
+### Core Settings
+```typescript
+{
+  // Required
+  name: string,              // Profile name
+  keyType: "jwt" | "token", // Authentication type
+
+  // Optional
+  ratelimit?: {             // Request rate limiting
+    requests: number,       // Max requests per window
+    window: number         // Time window in seconds
+  },
+  refill?: {                // Rate limit token replenishment
+    tokens: number,        // Tokens to add
+    interval: number       // Refill interval in seconds
+  },
+  remaining?: number,       // Initial request allocation
+  expires?: number,         // Token expiration in seconds
+  byteLength?: number,      // Token length (16-128 bytes)
+  prefix?: string,          // Token prefix
+  jwt_id?: string          // JWT configuration ID
+}
+```
+
+## Creating Profiles
+
+```http
+POST /{account_id}/authentication/create
+Content-Type: application/json
+
+{
+  "name": "basic-api-access",
+  "keyType": "token",
+  "ratelimit": {
+    "requests": 1000,
+    "window": 3600
+  },
+  "refill": {
+    "tokens": 1000,
+    "interval": 3600
+  },
+  "byteLength": 32,
+  "prefix": "ta_"
+}
+```
+
+## Example Configurations
+
+### Basic API Access
+```json
+{
+  "name": "basic-api",
+  "keyType": "token",
+  "ratelimit": {
+    "requests": 100,
+    "window": 60
+  },
+  "byteLength": 32
+}
+```
+
+### Enterprise Usage
+```json
+{
+  "name": "enterprise",
+  "keyType": "token",
+  "ratelimit": {
+    "requests": 10000,
+    "window": 3600
+  },
+  "refill": {
+    "tokens": 10000,
+    "interval": 3600
+  },
+  "byteLength": 64,
+  "prefix": "ta_ent_"
+}
+```
+
+### JWT Authentication
+```json
+{
+  "name": "jwt-auth",
+  "keyType": "jwt",
+  "jwt_id": "jwt_config_123",
+  "ratelimit": {
+    "requests": 5000,
+    "window": 3600
+  }
+}
+```
+
+## Profile Inheritance
+
+When an authentication profile is attached to an application:
+1. All tokens inherit profile settings
+2. Rate limits apply per token
+3. Refill schedules operate independently
+4. Expiration applies to new tokens
+
+## Limitations
+
+- Rate limit window: 1-86400 seconds
+- Refill interval: 1-86400 seconds
+- Token length: 16-128 bytes
+- Prefix length: 50 characters max
+- Maximum requests: 1000000 per window
+
+## Best Practices
+
+1. **Rate Limiting**
+   - Set appropriate limits for use case
+   - Configure refill for continuous usage
+   - Consider burst traffic patterns
+
+2. **Token Configuration**
+   - Use minimum 32 bytes for security
+   - Add descriptive prefixes
+   - Set reasonable expiration
+
+3. **Profile Management**
+   - Create profiles per usage tier
+   - Document profile purposes
+   - Regular review and updates
