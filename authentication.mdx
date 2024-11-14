@@ -4,33 +4,40 @@ description: "This guide will help you prevent abuse and fraud in your applicati
 ---
 
 
-Authentication profiles in TypeAuth define security and rate limiting settings that are applied to applications and their associated tokens.
+Authentication Profiles
+Authentication profiles are central to TypeAuth's security model, defining how applications and their tokens handle authentication, rate limiting, and access control. These profiles act as reusable configuration templates that can be attached to multiple applications, ensuring consistent security policies across your API ecosystem.
+Key Benefits
+
+Centralized Security: Define authentication rules once, apply everywhere
+Flexible Configuration: Support for both JWT and opaque tokens
+Rate Control: Fine-grained request rate limiting and token replenishment
+Token Management: Customizable token generation and expiration
+Policy Inheritance: All tokens inherit their application's profile settings
+
+Use Cases
+
+API Products
+
+Different tiers (Basic, Pro, Enterprise)
+Usage-based pricing
+Feature access control
+
+
+Internal Services
+
+Service-to-service authentication
+Department-specific access limits
+Development vs. Production settings
+
+
+Customer APIs
+
+Client credential management
+Usage quotas
+Customer-specific rate limits
 
 ## Configuration Properties
 
-### Core Settings
-```typescript
-{
-  // Required
-  name: string,              // Profile name
-  keyType: "jwt" | "token", // Authentication type
-
-  // Optional
-  ratelimit?: {             // Request rate limiting
-    requests: number,       // Max requests per window
-    window: number         // Time window in seconds
-  },
-  refill?: {                // Rate limit token replenishment
-    tokens: number,        // Tokens to add
-    interval: number       // Refill interval in seconds
-  },
-  remaining?: number,       // Initial request allocation
-  expires?: number,         // Token expiration in seconds
-  byteLength?: number,      // Token length (16-128 bytes)
-  prefix?: string,          // Token prefix
-  jwt_id?: string          // JWT configuration ID
-}
-```
 
 ## Creating Profiles
 
