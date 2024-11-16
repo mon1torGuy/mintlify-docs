@@ -46,6 +46,8 @@
 				"application",
 				"authentication",
 				"security",
+				"anomalydetection",
+				"geosentry",
 				"routing",
 				"token",
 				"jwt",

@@ -1,0 +1,207 @@
+---
+title: "GeoSentry"
+description: "This guide will help you to understand and configure your application"
+---
+# TypeAuth Security Features
+
+## GeoSentry™ - Impossible Travel Detection
+
+GeoSentry™ is an advanced security feature that detects and prevents physically impossible travel patterns in your API requests. It helps protect against token theft and unauthorized access by analyzing the geographic location of requests.
+
+### Configuration
+
+```typescript
+{
+  "security": {
+    "impossibleTravel": {
+      "enabled": true,
+      "profile": "STANDARD", // PERMISSIVE, STANDARD, STRICT, REGIONAL, CUSTOM_BUSINESS
+      "maxSpeedKmH": 1000,
+      "timeWindowMinutes": 60
+    }
+  }
+}
+```
+
+
+### GeoSentry™ Profiles
+
+1. **PERMISSIVE**
+   - Best suited for: Global content delivery and public services
+   - Characteristics:
+     - Accommodates fast international travel
+     - Focuses on extreme violations only
+     - Monitoring without blocking
+     - High tolerance for location changes
+   - Use case example:
+     - Content delivery networks
+     - Public documentation sites
+     - Global media streaming services
+   - Response Strategy:
+     - Logs suspicious patterns
+     - Allows all requests
+     - Provides analytics for review
+
+2. **STANDARD**
+   - Best suited for: General business applications and SaaS platforms
+   - Characteristics:
+     - Balanced security approach
+     - Commercial flight speed considerations
+     - Challenge-based verification
+     - Region-aware monitoring
+   - Use case example:
+     - SaaS platforms
+     - E-commerce applications
+     - Business collaboration tools
+   - Response Strategy:
+     - Monitors patterns
+     - Challenges suspicious transitions
+     - Allows verification for legitimate travel
+
+3. **STRICT**
+   - Best suited for: Financial services and high-security applications
+   - Characteristics:
+     - Zero-tolerance for suspicious patterns
+     - Conservative speed thresholds
+     - Immediate blocking of violations
+     - Comprehensive audit trail
+   - Use case example:
+     - Banking applications
+     - Healthcare systems
+     - Government services
+   - Response Strategy:
+     - Blocks suspicious transitions
+     - Requires administrative review
+     - Maintains detailed logs
+
+4. **REGIONAL**
+   - Best suited for: Location-specific services and regional compliance
+   - Characteristics:
+     - Strict geographic boundaries
+     - Country/region-specific rules
+     - Local travel patterns
+     - Regulatory compliance focus
+   - Use case example:
+     - Regional banking services
+     - Local government applications
+     - Geo-restricted services
+   - Response Strategy:
+     - Enforces regional boundaries
+     - Blocks out-of-region access
+     - Validates local compliance
+
+5. **CUSTOM_BUSINESS**
+   - Best suited for: Enterprise organizations with specific requirements
+   - Characteristics:
+     - Business hours awareness
+     - Known travel route allowances
+     - Department-specific rules
+     - Custom verification processes
+   - Use case example:
+     - Corporate VPN services
+     - Enterprise applications
+     - Multi-national organizations
+   - Response Strategy:
+     - Applies business context
+     - Handles special cases
+     - Integrates with business rules
+
+### Selection Guidelines
+
+- Choose **PERMISSIVE** when:
+  - You serve global content
+  - Blocking access is undesirable
+  - You need to establish baseline travel patterns
+  - User convenience is priority
+
+- Choose **STANDARD** when:
+  - You need balanced security
+  - You have international users
+  - You want suspicious activity verification
+  - You're unsure which profile to use
+
+- Choose **STRICT** when:
+  - You handle sensitive data
+  - Security is paramount
+  - You need regulatory compliance
+  - You require detailed audit trails
+
+- Choose **REGIONAL** when:
+  - You operate in specific regions
+  - You have geographic restrictions
+  - You need regulatory compliance
+  - You serve local markets
+
+- Choose **CUSTOM_BUSINESS** when:
+  - You have specific business hours
+  - You have known travel patterns
+  - You need role-based rules
+  - Standard profiles don't fit
+
+### Implementation Recommendations
+
+1. **Initial Setup**
+   - Start with monitoring mode
+   - Collect travel patterns
+   - Identify legitimate user behavior
+   - Document edge cases
+
+2. **Profile Selection**
+   - Evaluate security requirements
+   - Consider user base location
+   - Review compliance needs
+   - Assess business operations
+
+3. **Fine-tuning**
+   - Monitor false positives
+   - Adjust thresholds as needed
+   - Document legitimate exceptions
+   - Review and update rules
+
+4. **Ongoing Management**
+   - Regular rule reviews
+   - Pattern analysis
+   - Security incident reviews
+   - Performance monitoring
+
+### Best Practices
+
+1. **Business Integration**
+   - Align with business hours
+   - Consider office locations
+   - Account for remote work
+   - Plan for business travel
+
+2. **User Experience**
+   - Clear error messages
+   - Simple verification process
+   - Support contact information
+   - Documentation of policies
+
+3. **Security Balance**
+   - Risk-based approach
+   - Graduated responses
+   - Exception handling
+   - Audit logging
+
+4. **Compliance & Documentation**
+   - Regulatory alignment
+   - Policy documentation
+   - Incident response plans
+   - Regular reviews
+
+
+### Response Codes
+
+- `403 Forbidden`: When impossible travel is detected
+- `429 Too Many Requests`: When challenge is required
+
+### Example Response
+
+```json
+{
+  "error": "Security alert: Impossible travel detected",
+  "details": "Travel speed (1200 km/h) exceeds physical limitations. From US to CN in 2 hours."
+}
+```
+

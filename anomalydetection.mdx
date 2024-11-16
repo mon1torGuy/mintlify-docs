@@ -1,0 +1,162 @@
+---
+title: "Anomaly Detection"
+description: "This guide will help you to understand and configure your application"
+---
+
+## Anomaly Detection
+
+Advanced behavioral analysis system that detects unusual patterns in API usage. Helps identify potential security threats, API abuse, and system anomalies.
+
+### Configuration
+
+```typescript
+{
+    "anomalyDetection": {
+      "enabled": true,
+      "profile": "STANDARD", // PERMISSIVE, STANDARD, STRICT, API_GATEWAY, CUSTOM
+      "customConfig": {} // Optional overrides
+    }
+  
+}
+```
+
+
+
+### Available Profiles
+
+1. **PERMISSIVE**
+   - Best suited for: Public APIs, content delivery, and applications requiring minimal restrictions
+   - Characteristics:
+     - Most lenient monitoring approach
+     - Focuses on logging and observation
+     - Only flags extremely obvious anomalies
+     - No blocking actions, only monitoring
+   - Use case example: Content delivery networks, public documentation APIs
+
+2. **STANDARD**
+   - Best suited for: General web applications and business APIs
+   - Characteristics:
+     - Balanced approach between security and accessibility
+     - Moderate alerting thresholds
+     - Progressive response system (monitor → alert → challenge)
+     - Comprehensive pattern monitoring
+   - Use case example: SaaS platforms, e-commerce APIs
+
+3. **STRICT**
+   - Best suited for: Financial services, healthcare, and security-critical applications
+   - Characteristics:
+     - Zero-tolerance approach to suspicious behavior
+     - Immediate action on detected anomalies
+     - Comprehensive monitoring with strict thresholds
+     - Prioritizes security over convenience
+   - Use case example: Banking APIs, healthcare data systems
+
+4. **API_GATEWAY**
+   - Best suited for: High-traffic API gateways and microservices
+   - Characteristics:
+     - Optimized for high-frequency API calls
+     - Pattern-specific actions based on severity
+     - Short-term window analysis for quick response
+     - Balanced between performance and security
+   - Use case example: API gateways, microservices architectures
+
+5. **CUSTOM**
+   - Best suited for: Organizations with unique security requirements
+   - Characteristics:
+     - Complete control over all security parameters
+     - Ability to create specialized detection rules
+     - Flexible response system
+     - Pattern-specific configurations
+   - Use case example: Enterprise applications with specific compliance requirements
+
+### Selection Guidelines
+
+- Choose **PERMISSIVE** when:
+  - You're starting with anomaly detection
+  - You need to establish baseline behaviors
+  - Your application serves public, non-sensitive content
+  - You want to minimize user friction
+
+- Choose **STANDARD** when:
+  - You need balanced security
+  - You have a mix of public and private APIs
+  - You want automated responses without being too restrictive
+  - You're unsure which profile to start with
+
+- Choose **STRICT** when:
+  - You handle sensitive data
+  - Security is your top priority
+  - You have regulatory compliance requirements
+  - You need comprehensive audit trails
+
+- Choose **API_GATEWAY** when:
+  - You manage multiple backend services
+  - You have high-frequency API calls
+  - You need real-time anomaly detection
+  - Performance is critical
+
+- Choose **CUSTOM** when:
+  - Standard profiles don't meet your needs
+  - You have specific security requirements
+  - You need different rules for different endpoints
+  - You have unique compliance requirements
+
+### Profile Migration Path
+
+Recommended progression for new implementations:
+1. Start with **PERMISSIVE** to gather baseline data
+2. Move to **STANDARD** once normal patterns are established
+3. Upgrade to **STRICT** or **API_GATEWAY** based on needs
+4. Implement **CUSTOM** if specific adjustments are required
+
+
+### Monitored Patterns
+
+| Pattern | Description | Default Action |
+|---------|-------------|----------------|
+| Request Volume | Unusual number of requests | Alert |
+| Error Rates | Abnormal error frequency | Block |
+| Response Times | Unusual processing times | Alert |
+| Payload Sizes | Abnormal request/response sizes | Alert |
+| Endpoint Velocity | Unusual access patterns | Alert |
+
+### Actions
+
+- `monitor`: Log anomaly for analysis
+- `alert`: Log and notify administrators
+- `block`: Prevent request processing
+- `challenge`: Require additional verification
+
+### Example Response
+
+```json
+{
+  "error": "Anomaly detected",
+  "details": "Request volume anomaly detected: 150 requests/min (4.5σ deviation)",
+  "riskScore": 75,
+  "factors": [
+    "Volume anomaly_5m",
+    "Endpoint velocity_15m"
+  ]
+}
+```
+
+### Performance Impact
+
+- Average latency impact: 1-5ms
+- Configurable sampling rates
+- Efficient caching of baseline metrics
+- Async processing of non-critical operations
+
+### Best Practices
+
+1. Start with PERMISSIVE profile and monitor logs
+2. Adjust to STANDARD once baseline is established
+3. Use STRICT for high-security applications
+4. Configure custom rules based on your traffic patterns
+5. Monitor false positive rates and adjust accordingly
+
+### Integration
+
+```typescript
+// TypeAuth configu
