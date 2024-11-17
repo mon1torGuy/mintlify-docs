@@ -46,6 +46,7 @@
 				"application",
 				"authentication",
 				"security",
+				"abuse",
 				"anomalydetection",
 				"geosentry",
 				"routing",
