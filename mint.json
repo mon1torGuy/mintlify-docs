@@ -5,6 +5,7 @@
 		"dark": "/logo/dark.svg",
 		"light": "/logo/light.svg"
 	},
+
 	"openapi": ["openapi.json"],
 
 	"favicon": "/favicon.svg",
@@ -68,7 +69,7 @@
 	},
 	"modeToggle": {
 		"default": "dark",
-		"isHidden": true
+		"isHidden": false
 	},
 	"footerSocials": {
 		"github": "https://github.com/typeauth",
