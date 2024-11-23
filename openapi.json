@@ -1877,10 +1877,12 @@
 						}
 					},
 					"geoSentry": {
-						"type": "string"
+						"type": "string",
+						"enum": ["Permissive", "Standard", "Regional", "Strict"]
 					},
 					"anomalyDetection": {
-						"type": "string"
+						"type": "string",
+						"enum": ["Permissive", "Standard", "Regional", "Strict"]
 					}
 				}
 			},
