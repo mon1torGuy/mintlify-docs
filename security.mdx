@@ -64,7 +64,6 @@ TypeAuth offers predefined region configurations:
 - 🇩🇪 GE (Germany)
 - 🔒 TOR and Open Proxies
 
-<Note>If you select "TOR and Open Proxies" TypeAuth will block traffic from those IPs.</Note>
 
 ### Configuration
 
@@ -85,6 +84,9 @@ PATCH /{account_id}/security/geoblock/{application_id}?area=US
 - Only traffic from selected regions will be allowed
 - All other traffic will be blocked with a 403 Forbidden response
 - IP geolocation is performed at the edge for minimal latency
+
+<Note>If you select "TOR and Open Proxies" TypeAuth will block traffic from those regions</Note>
+
 
 ## Security Best Practices
 
