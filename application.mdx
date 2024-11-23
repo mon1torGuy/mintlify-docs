@@ -67,6 +67,9 @@ Applications can be enhanced by attaching various profiles:
    - AI content filtering
    - Prompt injection protection
    - Response validation
+5. **Schema Validation Profiles**
+   - Upload a OpenAPIv3 schema
+   - Allow/deny traffic based on that schema
 
 ### Attaching Profiles
 
@@ -85,7 +88,9 @@ Content-Type: application/json
   "auth_id": "auth-prof-123",
   "abuse_id": "route-prof-456",
   "routing_id": "fraud-prof-789",
-  "llmcache_id": "llm-prof-012"
+  "llmcache_id": "llm-prof-012",
+  "schema_id": "schema-652"
+
 }
 ```
 
@@ -99,12 +104,13 @@ graph TB
     Domain -->|2. Abuse Check| Fraud[Fraud & Abuse Profile]
     Domain -->|3. Route Transform| Route[Routing Profile]
     Domain -->|4. LLM Protection| LLM[LLM Profile]
-    Auth & Fraud & Route & LLM -->|Validated Request| Origin[Origin Server]
-    
-    classDef profile fill:#f9f,stroke:#333,stroke-width:2px
-    class Auth,Fraud,Route,LLM profile
-```
+    Domain -->|5. Schema Validation| Shema[Schema Profile]
 
+    Auth & Schema & Fraud & Route & LLM -->|Validated Request| Origin[Origin Server]
+
+    classDef profile fill:#f9f,stroke:#333,stroke-width:2px
+    class Auth,Schema,Fraud,Route,LLM profile
+```
 
 
 ## Best Practices
