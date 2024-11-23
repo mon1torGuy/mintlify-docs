@@ -113,9 +113,8 @@ Consider these factors when configuring geoblocking:
 ### 3. Monitoring and Alerts
 
 Monitor security events through:
-- TypeAuth Dashboard
-- Security logs
-- Real-time alerts
+- TypeAuth Map Hiys
+- Security Event logs
 - Traffic analytics
 
 ## Implementation Guide
@@ -135,46 +134,13 @@ Content-Type: application/json
 }
 ```
 
-### 2. Advanced Configuration
 
-```http
-POST /api/v1/applications/{application_id}/security/advanced
-Content-Type: application/json
-
-{
-  "waf": {
-    "enabled": true,
-    "sensitivity": "high",
-    "custom_rules_enabled": true
-  },
-  "geoblocking": {
-    "enabled": true,
-    "allowed_regions": ["US", "EU"],
-    "block_anonymous_proxy": true
-  }
-}
-```
-
-## Monitoring and Logs
-
-### Security Events
-- Real-time security incident logging
-- Detailed attack information
-- Geographic origin of threats
-- Attack type classification
-
-### Access Logs
-- Blocked request details
-- Geolocation information
-- WAF rule triggers
-- Request metadata
 
 ## Response Codes
 
 | Code | Description | Cause |
 |------|-------------|-------|
 | 403  | Forbidden | Geoblocking or WAF rule triggered |
-| 400  | Bad Request | Invalid request format |
 | 429  | Too Many Requests | Rate limit exceeded |
 
 ## Recommendations
@@ -200,12 +166,13 @@ Content-Type: application/json
 - Geoblocking limited to predefined regions
 - WAF rule updates may take up to 5 minutes to propagate
 
+<Tip>If you need to a region that is not in the list, please send and email to pablo@typeauth.com</Tip>
+
+
 ## Future Security Features
 
 We are continuously working to enhance our security features. Upcoming additions will include:
 - Custom WAF rules
-- Rate limiting
-- DDoS protection
 - Advanced threat analytics
 
 ## Need Help?
