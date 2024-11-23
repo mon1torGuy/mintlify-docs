@@ -1869,10 +1869,12 @@
 						"type": "object",
 						"properties": {
 							"requests": {
-								"type": "string"
+								"type": "string",
+								"enum": ["1m", "100k"]
 							},
 							"interval": {
-								"type": "string"
+								"type": "string",
+								"enum": ["10s", "1m", "5m", "10m"]
 							}
 						}
 					},

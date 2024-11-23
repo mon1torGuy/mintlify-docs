@@ -13,14 +13,17 @@ TypeAuth provides robust security features to protect your application from vari
 TypeAuth implements intelligent rate limiting across your entire application to prevent brute force attacks and abuse.
 
 #### Configuration
-```typescript
-const typeAuth = new TypeAuth({
-  rateLimit: {
-    maxRequests: 100,
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    skipSuccessfulRequests: false
-  }
-});
+```bash
+curl --request POST \
+  --url https://api.typeauth.com/{account_id}/abuse/create \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "<string>",
+  "ratelimit": {
+    "requests": "<string>",
+    "interval": "<string>"
+  },
+}'
 ```
 
 #### Key Features
