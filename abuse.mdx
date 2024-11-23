@@ -64,7 +64,6 @@ curl --request POST \
 ### Geo Sentry
 
 GeoSentry protects your API endpoints by monitoring and detecting suspicious geographic access patterns. It tracks physical locations where authentication tokens are used to identify potentially compromised credentials when they're used from impossible locations in unrealistic timeframes.
-<br />
 For example: If a token is used in London and then 30 minutes later in Buenos Aires, GeoSentry recognizes this physically impossible travel time and can block the request, require verification, or alert your security team - preventing unauthorized access even if the attacker has valid credentials.
 #### Configuration
 ```bash
@@ -93,7 +92,6 @@ curl --request POST \
 ### Anomaly Detection
 
 TypeAuth's Anomaly Detection system is an advanced security feature that monitors API behavior patterns to identify potential threats and unusual activities. It analyzes various metrics like request volumes, error rates, response times, payload sizes, and endpoint velocity to detect deviations from normal patterns.
-<br />
 For example: If your API typically handles 100 requests per minute and suddenly receives 1,000 requests, or if response times suddenly spike from 200ms to 2 seconds, the system will flag these anomalies and take configured actions based on your profile - from simple monitoring to blocking requests.
 #### Implementation
 ```bash
