@@ -1865,10 +1865,21 @@
 							"type": "string"
 						}
 					},
-					"rlRequests": {
+					"ratelimit": {
+						"type": "object",
+						"properties": {
+							"requests": {
+								"type": "string"
+							},
+							"interval": {
+								"type": "string"
+							}
+						}
+					},
+					"geoSentry": {
 						"type": "string"
 					},
-					"rlInterval": {
+					"anomalyDetection": {
 						"type": "string"
 					}
 				}
