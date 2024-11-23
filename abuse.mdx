@@ -85,52 +85,10 @@ curl --request POST \
 
 #### Profiles
 
-	- **Permissive**: Allow
-			maxSpeedKmH: 1200, // Fast commercial aircraft
-			timeWindowMinutes: 120,
-			minDistance: 1000, // Only check trips over 1000km
-			riskLevel: "low",
-			action: "monitor",
-			allowUnknownLocations: true,
-			tolerancePercentage: 20, // 20% margin of error
-
-	STANDARD: {
-		name: "Standard",
-		config: {
-			maxSpeedKmH: 1000, // Average commercial aircraft
-			timeWindowMinutes: 90,
-			minDistance: 500,
-			riskLevel: "medium",
-			action: "challenge",
-			allowUnknownLocations: true,
-			tolerancePercentage: 10,
-		},
-	},
-	STRICT: {
-		name: "Strict",
-		config: {
-			maxSpeedKmH: 800, // Conservative aircraft speed
-			timeWindowMinutes: 60,
-			minDistance: 300,
-			riskLevel: "high",
-			action: "block",
-			allowUnknownLocations: false,
-			tolerancePercentage: 5,
-		},
-	},
-	REGIONAL: {
-		name: "Regional",
-		config: {
-			maxSpeedKmH: 500, // Regional travel
-			timeWindowMinutes: 45,
-			minDistance: 100,
-			riskLevel: "high",
-			action: "block",
-			allowedCountries: [], // Define per region
-			allowUnknownLocations: false,
-			tolerancePercentage: 5,
-		},
-	},
+- **Permissive**: Best for global content delivery networks (CDNs) or public APIs where users frequently travel internationally and blocking access would significantly impact service availability.
+- **Standard**: Ideal for typical business applications, SaaS platforms, or e-commerce sites that need balanced security without overly restricting legitimate global users.
+- **Strict**: Perfect for financial services, healthcare applications, or government systems where security is paramount and any suspicious geographic patterns must be blocked immediately.
+- **Regional**: Designed for services that should only operate within specific geographic boundaries due to regulatory requirements (like gambling sites) or business operations limited to certain countries/regions.
 
 ### Anomaly Detection
 
