@@ -96,22 +96,7 @@ Content-Type: application/json
 
 ## Application Architecture
 
-[Diagram Placeholder]
-```mermaid
-graph TB
-    Client[Client] -->|Request| Domain[TypeAuth Domain]
-    Domain -->|1. Auth Check| Auth[Authentication Profile]
-    Domain -->|2. Abuse Check| Fraud[Fraud & Abuse Profile]
-    Domain -->|3. Route Transform| Route[Routing Profile]
-    Domain -->|4. LLM Protection| LLM[LLM Profile]
-    Domain -->|5. Schema Validation| Shema[Schema Profile]
-
-    Auth & Schema & Fraud & Route & LLM -->|Validated Request| Origin[Origin Server]
-
-    classDef profile fill:#f9f,stroke:#333,stroke-width:2px
-    class Auth,Schema,Fraud,Route,LLM profile
-```
-
+![TypeAuth Diagram](/images/typeauth_diagram.png)
 
 ## Best Practices
 
