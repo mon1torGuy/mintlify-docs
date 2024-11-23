@@ -63,9 +63,9 @@ curl --request POST \
 
 ### Geo Sentry
 
-GeoSentry protects your API endpoints by monitoring and detecting suspicious geographic access patterns. It works by tracking the physical locations where authentication tokens are used and can identify potentially compromised credentials when they're used from impossible locations in unrealistic timeframes - for instance, if the same token is used in New York and then Tokyo within minutes.
-Here's a practical example: Imagine a customer's API token is suddenly used from their usual location in London, and then 30 minutes later, the same token attempts to access your API from Buenos Aires. Since it's physically impossible to travel this distance in such a short time, GeoSentry would flag this as suspicious activity and can either block the request, require additional verification, or alert your security team depending on your configuration. This early detection can prevent unauthorized access even if the attacker has obtained valid credentials.
-
+GeoSentry protects your API endpoints by monitoring and detecting suspicious geographic access patterns. It tracks physical locations where authentication tokens are used to identify potentially compromised credentials when they're used from impossible locations in unrealistic timeframes.
+<br />
+For example: If a token is used in London and then 30 minutes later in Buenos Aires, GeoSentry recognizes this physically impossible travel time and can block the request, require verification, or alert your security team - preventing unauthorized access even if the attacker has valid credentials.
 #### Configuration
 ```bash
 curl --request POST \
@@ -92,8 +92,9 @@ curl --request POST \
 
 ### Anomaly Detection
 
-Advanced machine learning-based system to identify suspicious patterns and potential security threats.
-
+TypeAuth's Anomaly Detection system is an advanced security feature that monitors API behavior patterns to identify potential threats and unusual activities. It analyzes various metrics like request volumes, error rates, response times, payload sizes, and endpoint velocity to detect deviations from normal patterns.
+<br />
+For example: If your API typically handles 100 requests per minute and suddenly receives 1,000 requests, or if response times suddenly spike from 200ms to 2 seconds, the system will flag these anomalies and take configured actions based on your profile - from simple monitoring to blocking requests.
 #### Implementation
 ```bash
 curl --request POST \
@@ -115,6 +116,12 @@ curl --request POST \
 - **Customizable Alerts**: Set different notification thresholds
 - **Automatic Response**: Configure automated actions for detected anomalies
 
+#### Profiles
+
+- **Permissive**: Best for development environments or public APIs where monitoring anomalies is needed but blocking actions could disrupt service availability (uses higher deviation thresholds and only monitors).
+- **Standard**: Ideal for most production applications needing balanced protection - alerts on moderate anomalies and can challenge suspicious users without immediately blocking them.
+- **Strict**: Perfect for financial or healthcare applications requiring maximum security - uses stricter thresholds and immediately blocks suspicious activities.
+- **API Gateway**: Optimized for high-traffic API gateways with very short monitoring windows (1-15 minutes) and specialized thresholds for different types of anomalies.
 ## Best Practices
 
 1. **Start Conservative**: Begin with less restrictive settings and adjust based on your needs
@@ -124,48 +131,29 @@ curl --request POST \
 
 ## Example Implementation
 
-```typescript
-import { TypeAuth } from 'typeauth';
-
-const security = new TypeAuth({
-  rateLimit: {
-    maxRequests: 100,
-    windowMs: 900000, // 15 minutes
+```bash
+curl --request POST \
+  --url https://api.typeauth.com/{account_id}/abuse/create \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "abuse 1",
+  "blocklist": [
+    "bademail"
+  ],
+  "exceptions": [
+    "google.com"
+  ],
+  "ratelimit": {
+    "requests": "1m",
+    "interval": "10s"
   },
-  emailSecurity: {
-    blockDisposableEmails: true,
-  },
-  geoSentry: {
-    enabled: true,
-    notifyOnChange: true,
-  },
-  anomalyDetection: {
-    enabled: true,
-    sensitivity: 'medium',
-  }
-});
-
-// Apply middleware to your application
-app.use(security.protect());
+  "checkLocations": "header",
+  "checkPropertyName": "email",
+  "geoSentry": "Permissive",
+  "anomalyDetection": "Permissive"
+}'
 ```
 
-## Error Handling
-
-TypeAuth provides detailed error codes and messages for different types of security violations:
-
-```typescript
-try {
-  await auth.validateRequest(request);
-} catch (error) {
-  if (error.code === 'RATE_LIMIT_EXCEEDED') {
-    // Handle rate limiting
-  } else if (error.code === 'SUSPICIOUS_LOCATION') {
-    // Handle suspicious geographic activity
-  } else if (error.code === 'DISPOSABLE_EMAIL') {
-    // Handle disposable email attempt
-  }
-}
-```
 
 ## Additional Resources
 
