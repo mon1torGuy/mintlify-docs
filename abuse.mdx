@@ -18,10 +18,10 @@ curl --request POST \
   --url https://api.typeauth.com/{account_id}/abuse/create \
   --header 'Content-Type: application/json' \
   --data '{
-  "name": "<string>",
+  "name": "Global Rate Limit",
   "ratelimit": {
-    "requests": "<string>",
-    "interval": "<string>"
+    "requests": "1m", // 1 million request
+    "interval": "10m" // 10 minutes
   },
 }'
 ```
@@ -37,14 +37,22 @@ curl --request POST \
 Prevent registration abuse by detecting and blocking disposable email addresses.
 
 #### Usage
-```typescript
-const typeAuth = new TypeAuth({
-  emailSecurity: {
-    blockDisposableEmails: true,
-    customBlockList: ['example-disposable.com'],
-    allowList: ['legitimate-temporary.com']
-  }
-});
+```bash
+curl --request POST \
+  --url https://api.typeauth.com/{account_id}/abuse/create \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "Bademails",
+  "blocklist": [
+    "bademail.com"
+  ],
+  "exceptions": [
+    "google.com", "microsoft.com"
+  ],
+  "checkPropertyName": "email",
+  "checkLocations": "header"
+
+}'
 ```
 
 #### Features
@@ -55,18 +63,18 @@ const typeAuth = new TypeAuth({
 
 ### Geo Sentry
 
-Monitor and protect against suspicious geographic access patterns.
+GeoSentry protects your API endpoints by monitoring and detecting suspicious geographic access patterns. It works by tracking the physical locations where authentication tokens are used and can identify potentially compromised credentials when they're used from impossible locations in unrealistic timeframes - for instance, if the same token is used in New York and then Tokyo within minutes.
+Here's a practical example: Imagine a customer's API token is suddenly used from their usual location in London, and then 30 minutes later, the same token attempts to access your API from Buenos Aires. Since it's physically impossible to travel this distance in such a short time, GeoSentry would flag this as suspicious activity and can either block the request, require additional verification, or alert your security team depending on your configuration. This early detection can prevent unauthorized access even if the attacker has obtained valid credentials.
 
 #### Configuration
-```typescript
-const typeAuth = new TypeAuth({
-  geoSentry: {
-    enabled: true,
-    suspiciousCountries: ['XX', 'YY'],
-    requireVerification: true,
-    notifyOnChange: true
-  }
-});
+```bash
+curl --request POST \
+  --url https://api.typeauth.com/{account_id}/abuse/create \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "Protect",
+  "geoSentry: "Permissive"
+}'
 ```
 
 #### Capabilities
@@ -74,22 +82,69 @@ const typeAuth = new TypeAuth({
 - **Velocity Checking**: Detect impossibly fast geographic movements
 - **Risk Scoring**: Assign risk levels to different geographic patterns
 - **Custom Rules**: Set specific policies for different regions
-- **2FA Triggers**: Automatically require additional verification for suspicious locations
+
+#### Profiles
+
+	- **Permissive**: Allow
+			maxSpeedKmH: 1200, // Fast commercial aircraft
+			timeWindowMinutes: 120,
+			minDistance: 1000, // Only check trips over 1000km
+			riskLevel: "low",
+			action: "monitor",
+			allowUnknownLocations: true,
+			tolerancePercentage: 20, // 20% margin of error
+
+	STANDARD: {
+		name: "Standard",
+		config: {
+			maxSpeedKmH: 1000, // Average commercial aircraft
+			timeWindowMinutes: 90,
+			minDistance: 500,
+			riskLevel: "medium",
+			action: "challenge",
+			allowUnknownLocations: true,
+			tolerancePercentage: 10,
+		},
+	},
+	STRICT: {
+		name: "Strict",
+		config: {
+			maxSpeedKmH: 800, // Conservative aircraft speed
+			timeWindowMinutes: 60,
+			minDistance: 300,
+			riskLevel: "high",
+			action: "block",
+			allowUnknownLocations: false,
+			tolerancePercentage: 5,
+		},
+	},
+	REGIONAL: {
+		name: "Regional",
+		config: {
+			maxSpeedKmH: 500, // Regional travel
+			timeWindowMinutes: 45,
+			minDistance: 100,
+			riskLevel: "high",
+			action: "block",
+			allowedCountries: [], // Define per region
+			allowUnknownLocations: false,
+			tolerancePercentage: 5,
+		},
+	},
 
 ### Anomaly Detection
 
 Advanced machine learning-based system to identify suspicious patterns and potential security threats.
 
 #### Implementation
-```typescript
-const typeAuth = new TypeAuth({
-  anomalyDetection: {
-    enabled: true,
-    sensitivity: 'medium',
-    autoBlock: false,
-    notificationThreshold: 0.7
-  }
-});
+```bash
+curl --request POST \
+  --url https://api.typeauth.com/{account_id}/abuse/create \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "Protect Anomaly",
+  "anomalyDetection: "Permissive"
+}'
 ```
 
 #### Key Features

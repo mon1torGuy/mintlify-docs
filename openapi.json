@@ -1878,6 +1878,13 @@
 							}
 						}
 					},
+					"checkLocations": {
+						"type": "string",
+						"enum": ["cookie", "header"]
+					},
+					"checkPropertyName": {
+						"type": "string"
+					},
 					"geoSentry": {
 						"type": "string",
 						"enum": ["Permissive", "Standard", "Regional", "Strict"]
