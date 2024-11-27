@@ -47,6 +47,7 @@
 				"application",
 				"authentication",
 				"security",
+				"schema",
 				"abuse",
 				"anomalydetection",
 				"geosentry",

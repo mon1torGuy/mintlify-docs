@@ -1,0 +1,153 @@
+---
+title: Schema Validation
+description: Secure your API endpoints with TypeAuth's powerful schema validation. Configure method checks, path validation, and payload verification through an intuitive dashboard interface.
+---
+
+TypeAuth provides comprehensive request validation capabilities that help you ensure all incoming requests match your API specifications. Our validation system lets you configure rules through the dashboard without writing code, making API security accessible to everyone.
+
+[RECOMMENDED IMAGE PLACEMENT 1: Screenshot of the validation dashboard interface showing the main configuration tabs for Methods, Paths, Headers and Body validation with a clean, modern UI design]
+
+## Getting Started
+
+Schema validation comes enabled by default with basic HTTP validations:
+
+- HTTP method verification
+- URL path format checking
+- Content-Length validation
+- Header format verification
+
+To customize your validation rules:
+
+1. Navigate to your application in the Dashboard
+2. Click "Validation Rules" in the left menu
+3. Select "Create New Profile"
+4. Configure your desired validations
+5. Enable the profile
+
+## Core Features
+
+### Method Validation
+
+Control which HTTP methods are allowed on your endpoints:
+
+- Restrict to specific methods (GET, POST, PUT, etc.)
+- Configure different methods per path
+- Set custom error messages
+- Override defaults per endpoint
+
+### Path Validation
+
+Ensure URLs match your expected patterns:
+
+- Validate path parameter presence
+- Type checking for path variables
+- Pattern matching with regex
+- Length restrictions
+- Required vs optional segments
+
+[RECOMMENDED IMAGE PLACEMENT 2: Flowchart illustrating the validation process from request receipt through the different validation stages (method → path → headers → body) with clear pass/fail indicators]
+
+### Variable Validation
+
+For path, query, and header variables:
+
+- Type validation (string, number, boolean)
+- Format checks (email, date, UUID)
+- Numeric ranges
+- String length limits
+- Custom regex patterns
+
+### Body Validation
+
+Current JSON payload validation features:
+
+- Presence checking
+- Content-Type verification
+- Size limits
+- Basic structure validation
+- Required field validation
+
+## Error Handling
+
+Customize how validation failures are handled:
+
+**Status Codes**
+- Set specific HTTP status codes
+- Different codes per validation type
+- Default status code overrides
+
+**Error Messages**
+- Custom error messages
+- Localization support
+- Include validation details
+- Template variables
+
+**Response Format**
+- JSON/XML responses
+- Custom error structures
+- Forward to origin option
+
+## Performance Considerations
+
+Our validation engine is optimized for minimal impact:
+
+- Method validation: 0.1-0.3ms
+- Path validation: 0.3-0.8ms
+- Variable validation: 0.5-1.5ms
+- Body validation: 1-3ms
+- Full validation stack: 2-5ms average
+
+## Best Practices
+
+1. Start with Essential Validations
+   - Enable method restrictions first
+   - Add path validation for dynamic routes
+   - Implement body validation where needed
+
+2. Error Response Strategy
+   - Use clear error messages
+   - Include actionable information
+   - Maintain consistent format
+
+3. Monitoring and Maintenance
+   - Review rejection patterns
+   - Adjust rules based on traffic
+   - Document custom validations
+
+## Upcoming Features
+
+We're actively working on expanding validation capabilities:
+
+- OpenAPI/Swagger schema support
+- XML payload validation
+- GraphQL schema validation
+- Advanced JSON Schema support
+- Custom validation functions
+- Schema versioning
+
+## Current Limitations
+
+Please note the following constraints:
+
+- 100 validation rules per profile maximum
+- 2048 character path length limit
+- 10MB maximum body size
+- 50 custom error responses per profile
+- Basic JSON validation only (advanced features coming soon)
+
+## Monitoring
+
+Track validation performance through our analytics dashboard:
+
+- Real-time rejection rates
+- Validation timing metrics
+- Error distribution patterns
+- Rule effectiveness stats
+- Traffic pattern analysis
+
+Average read time: 7 minutes
+Categories: API Security, Documentation, Schema Validation
+
+---
+
+*Looking for help? Visit our support center or contact our technical team for assistance with configuration and optimization.*
