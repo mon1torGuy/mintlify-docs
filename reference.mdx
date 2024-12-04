@@ -13,9 +13,9 @@ TypeAuth is deployed using an out-of-band approach, which means that the authent
 
 ## Deployment Architecture
 
-The reference architecture for deployingTypeAuthconsists of the following components:
+The reference architecture for deploying TypeAuth consists of the following components:
 
-1. **TypeAuth API**: TheTypeAuthAPI is a standalone service that handles all authentication and authorization requests. It is responsible for managing API keys, tokens, and JWT.
+1. **TypeAuth API**: The TypeAuth API is a standalone service that handles all authentication and authorization requests. It is responsible for managing API keys, tokens, and JWT.
 
 2. **API Gateway**: Your API Gateway acts as the entry point for all incoming API requests. It receives the requests from clients and forwards them to the appropriate backend services.
 
@@ -33,11 +33,11 @@ The authentication flow based on the provided image is as follows:
 
 1. The user includes an API key or token in the request headers or parameters and sends the request to the API Gateway.
 
-2. The API Gateway receives the request and extracts the token and sends a verification request to theTypeAuthAPI, passing the extracted token.
+2. The API Gateway receives the request and extracts the token and sends a verification request to the TypeAuth API, passing the extracted token.
 
-3. TheTypeAuthAPI verifies the validity of the API key or token and checks the associated permissions and constraints. If the API key or token is valid and the requested action is allowed, theTypeAuthAPI responds with a success status and any additional metadata required by the API Gateway.
+3. The TypeAuth API verifies the validity of the API key or token and checks the associated permissions and constraints. If the API key or token is valid and the requested action is allowed, the TypeAuth API responds with a success status and any additional metadata required by the API Gateway.
 
-4. The API Gateway receives the response from theTypeAuthAPI. If the authentication is successful, it forwards the request to the appropriate backend service. If the authentication fails, the API Gateway returns an appropriate error response to the user.
+4. The API Gateway receives the response from the TypeAuth API. If the authentication is successful, it forwards the request to the appropriate backend service. If the authentication fails, the API Gateway returns an appropriate error response to the user.
 
 5. The backend service responds to the API Gateway and the API Gateway respond to the user.
 
@@ -45,10 +45,10 @@ The authentication flow based on the provided image is as follows:
 
 DeployingTypeAuthusing an out-of-band approach offers several benefits:
 
-1. **Security**: By separating the authentication and authorization logic from your main application flow, you can enhance the security of your system. TheTypeAuthAPI can be deployed in a separate environment with its own security measures, reducing the attack surface of your application.
+1. **Security**: By separating the authentication and authorization logic from your main application flow, you can enhance the security of your system. The TypeAuth API can be deployed in a separate environment with its own security measures, reducing the attack surface of your application.
 
-2. **Scalability**: The out-of-band deployment allows you to scale theTypeAuthAPI independently from your API Gateway and backend services. This enables you to handle a large number of authentication and authorization requests without impacting the performance of your main application.
+2. **Scalability**: The out-of-band deployment allows you to scale the TypeAuth API independently from your API Gateway and backend services. This enables you to handle a large number of authentication and authorization requests without impacting the performance of your main application.
 
-3. **Flexibility**:TypeAuthcan be easily integrated with different API Gateways and backend technologies. It provides a standardized interface for authentication and authorization, allowing you to switch or update your API Gateway or backend services without modifying the authentication logic.
+3. **Flexibility**: ypeAuth can be easily integrated with different API Gateways and backend technologies. It provides a standardized interface for authentication and authorization, allowing you to switch or update your API Gateway or backend services without modifying the authentication logic.
 
-4. **Maintainability**: Separating the authentication and authorization concerns from your main application code makes it easier to maintain and update the authentication logic. You can make changes to theTypeAuthAPI without affecting the rest of your application.
+4. **Maintainability**: Separating the authentication and authorization concerns from your main application code makes it easier to maintain and update the authentication logic. You can make changes to the TypeAuth API without affecting the rest of your application.
