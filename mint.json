@@ -1,6 +1,6 @@
 {
 	"$schema": "https://mintlify.com/schema.json",
-	"name": "typeauth Docs",
+	"name": "TypeAuth Docs",
 	"logo": {
 		"dark": "/logo/dark.svg",
 		"light": "/logo/light.svg"

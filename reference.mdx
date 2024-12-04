@@ -5,17 +5,17 @@ description: "Explore TypeAuth's recommended deployment patterns. Learn how to i
 
 ## Overview
 
-typeauth is a powerful authentication and authorization service that integrates seamlessly with your existing infrastructure. It provides a secure and scalable solution for managing API keys, tokens, and JWTs. This document explains the reference architecture for deployingTypeAuthand how it interacts with your API Gateway.
+TypeAuth is a powerful authentication and authorization service that integrates seamlessly with your existing infrastructure. It provides a secure and scalable solution for managing API keys, tokens, and JWTs. This document explains the reference architecture for deployingTypeAuthand how it interacts with your API Gateway.
 
 ## Out-of-Band Deployment
 
-typeauth is deployed using an out-of-band approach, which means that the authentication and authorization process is handled separately from your main application flow. This architecture ensures that the authentication and authorization logic is decoupled from your API Gateway, providing better security and flexibility.
+TypeAuth is deployed using an out-of-band approach, which means that the authentication and authorization process is handled separately from your main application flow. This architecture ensures that the authentication and authorization logic is decoupled from your API Gateway, providing better security and flexibility.
 
 ## Deployment Architecture
 
 The reference architecture for deployingTypeAuthconsists of the following components:
 
-1. **typeauth API**: TheTypeAuthAPI is a standalone service that handles all authentication and authorization requests. It is responsible for managing API keys, tokens, and JWT.
+1. **TypeAuth API**: TheTypeAuthAPI is a standalone service that handles all authentication and authorization requests. It is responsible for managing API keys, tokens, and JWT.
 
 2. **API Gateway**: Your API Gateway acts as the entry point for all incoming API requests. It receives the requests from clients and forwards them to the appropriate backend services.
 
@@ -23,7 +23,7 @@ The reference architecture for deployingTypeAuthconsists of the following compon
 
 ## Authentication Flow
 
-![typeauth Authentication Flow](https://developers.userzero.io/diagram-docs.png)
+![TypeAuth Authentication Flow](https://developers.userzero.io/diagram-docs.png)
 
 When a client makes a request to your API, the following authentication flow takes place:
   
